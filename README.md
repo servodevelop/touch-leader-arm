@@ -122,7 +122,3 @@ python stararm102_lumos_teleop.py --can can0 --leader-port /dev/ttyUSB0 --grippe
 └── docs/
     └── StarArm102_Lumos_Python_Teleoperation_Guide.docx
 ```
-
-## License
-
-本仓库当前未授予开源许可证；公开可见不代表获得复制、修改或再分发许可。若需为客户授予使用权，请在发布前添加经权利人确认的许可证或授权条款。
