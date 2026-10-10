@@ -3,7 +3,9 @@
 
 Run --calibrate first. Calibration records a neutral pose and the leader's
 intended joint ranges. It never commands robot motion. Teleoperation is
-read-only unless --execute is supplied.
+read-only for Lumos unless --execute is supplied. The HD leader button is
+enabled by default and controls leader holding torque even in preview mode.
+Use --button-disable for a leader without the HD button board.
 
 IMPORTANT: This is a starting bridge, not a verified joint mapping. Confirm
 joint order and direction with the arms clear and hardware E-stop reachable.
@@ -29,6 +31,8 @@ JOINT_SIGNS = (-1.0, 1.0, 1.0, 1.0, -1.0, -1.0)
 FOLLOW_GAIN = 1.0          # 主臂角度变化映射比例，范围 (0, 1]
 MAX_STEP_DEG = 1.0         # 每次循环最多追踪的角度，增大后跟随更快
 CONTROL_RATE_HZ = 50.0     # 读主臂/更新 Lumos 目标的循环频率
+HD_BUTTON_ENABLED = True  # 默认开启 HD 实体按钮悬停功能
+HD_BUTTON_ID = 7          # HD 按钮板 ID；不参与关节/夹爪映射
 # ================================================================
 
 
@@ -42,11 +46,41 @@ def parse_joint_map(value: str) -> tuple[int, ...]:
     return ids
 
 
-def read_leader(leader, joint_map: Sequence[int], include_gripper: bool = False) -> list[float]:
+class HDButton:
+    """Match python-sdk/stararm102_ro.py: 180 degrees locks joints 0..5."""
+
+    def __init__(self, leader, button_id: int):
+        self.leader = leader
+        self.id = button_id
+        self.locked: bool | None = None
+        if not leader.ping(button_id):
+            raise RuntimeError(
+                f"HD 按钮板 ID {button_id} 未响应。请检查连接/ID；无按钮时加 --button-disable。"
+            )
+
+    def update(self) -> None:
+        angle = float(self.leader.servos[self.id].angle_monitor)
+        if not math.isfinite(angle):
+            raise RuntimeError(f"HD 按钮板 ID {self.id} 返回了无效状态")
+        locked = angle == 180.0
+        if locked == self.locked:
+            return
+        # Only affect the six arm joints; never lock the gripper or button board.
+        for servo_id in LEADER_JOINT_IDS:
+            self.leader.stop_on_control_mode(servo_id, 0x11 if locked else 0x10, 0x00)
+        self.locked = locked
+        print("\nHD 主臂：悬停锁定" if locked else "\nHD 主臂：释放，可拖动")
+
+
+def read_leader(leader, joint_map: Sequence[int], include_gripper: bool = False,
+                hd_button: HDButton | None = None) -> list[float]:
     ids = list(joint_map)
     if include_gripper:
         ids.append(6)
-    leader.send_sync_servo_monitor(ids)
+    monitor_ids = ids + ([hd_button.id] if hd_button is not None else [])
+    leader.send_sync_servo_monitor(monitor_ids)
+    if hd_button is not None:
+        hd_button.update()
     return [float(leader.servos[servo_id].angle_monitor) for servo_id in ids]
 
 
@@ -87,6 +121,14 @@ def main() -> int:
                         help="Reverse the calibrated gripper mapping if open/close moves the wrong way")
     parser.add_argument("--execute", action="store_true",
                         help="Send commands to Lumos; without this flag only print proposed targets")
+    button_group = parser.add_mutually_exclusive_group()
+    button_group.add_argument("--button-enable", "--button_enable", dest="button_enabled",
+                              action="store_true", help="Enable HD leader button (default: enabled)")
+    button_group.add_argument("--button-disable", "--button_disable", dest="button_enabled",
+                              action="store_false", help="Disable HD button for a leader without a button board")
+    parser.set_defaults(button_enabled=HD_BUTTON_ENABLED)
+    parser.add_argument("--button-id", "--button_id", type=int, choices=range(7, 254),
+                        default=HD_BUTTON_ID, metavar="ID", help="HD button board ID, 7..253 (default: 7)")
     args = parser.parse_args()
 
     if len(JOINT_SIGNS) != 6 or any(sign not in (-1.0, 1.0) for sign in JOINT_SIGNS):
@@ -112,6 +154,10 @@ def main() -> int:
             timeout=0,
         )
         leader = uservo.UartServoManager(leader_uart)
+        hd_button = HDButton(leader, args.button_id) if args.button_enabled else None
+        if hd_button is not None:
+            print(f"HD 按钮功能已开启（ID={hd_button.id}）；预览模式也会控制主臂悬停。")
+            read_leader(leader, args.joint_map, args.gripper, hd_button)
         if args.calibrate:
             print("\n╔══════════════════════════════════════════════════════╗")
             print("║       Star Arm 102 → Lumos  校准向导                 ║")
@@ -124,7 +170,7 @@ def main() -> int:
 
         if args.calibrate:
             print("\n[1/3] 参考姿态已记录")
-            leader_home_and_gripper = read_leader(leader, args.joint_map, args.gripper)
+            leader_home_and_gripper = read_leader(leader, args.joint_map, args.gripper, hd_button)
             leader_home_deg = leader_home_and_gripper[:6]
             lumos_home_rad = [float(value) for value in lumos.get_joint_positions()]
             if len(lumos_home_rad) != 6:
@@ -145,7 +191,7 @@ def main() -> int:
             samples = 0
             last_report = time.monotonic()
             while not stop_recording.is_set():
-                values = read_leader(leader, args.joint_map)
+                values = read_leader(leader, args.joint_map, hd_button=hd_button)
                 range_min = [min(old, value) for old, value in zip(range_min, values)]
                 range_max = [max(old, value) for old, value in zip(range_max, values)]
                 samples += 1
@@ -163,9 +209,9 @@ def main() -> int:
             if args.gripper:
                 print("\n夹爪范围")
                 input("把 StarArm 夹爪摆到完全闭合位置，按 Enter 记录……")
-                closed = read_leader(leader, args.joint_map, True)[-1]
+                closed = read_leader(leader, args.joint_map, True, hd_button)[-1]
                 input("把 StarArm 夹爪摆到完全打开位置，按 Enter 记录……")
-                opened = read_leader(leader, args.joint_map, True)[-1]
+                opened = read_leader(leader, args.joint_map, True, hd_button)[-1]
                 if abs(opened - closed) < 2.0:
                     raise RuntimeError("夹爪记录范围不足 2 度；请重新校准。")
                 gripper_range = {"closed_deg": closed, "open_deg": opened}
@@ -231,7 +277,7 @@ def main() -> int:
         period = 1.0 / CONTROL_RATE_HZ
         next_tick = time.monotonic()
         while True:
-            feedback = read_leader(leader, args.joint_map, args.gripper)
+            feedback = read_leader(leader, args.joint_map, args.gripper, hd_button)
             leader_deg = feedback[:6]
             clipped = [max(lo, min(hi, value))
                        for value, lo, hi in zip(leader_deg, leader_min_deg, leader_max_deg)]
@@ -246,6 +292,8 @@ def main() -> int:
             previous_target = target
 
             line = f"leader_deg={[round(v, 1) for v in leader_deg]}"
+            if hd_button is not None:
+                line += " HD=悬停" if hd_button.locked else " HD=释放"
             if args.gripper:
                 g = feedback[-1]
                 closed = float(gripper_range["closed_deg"])

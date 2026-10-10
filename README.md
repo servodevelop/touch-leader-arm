@@ -86,7 +86,7 @@ python stararm102_lumos_teleop.py --calibrate --can can0 --leader-port /dev/ttyU
 
 ## 先预览，再执行
 
-不带 `--execute` 时程序只显示输入，不向 Lumos 下发运动目标：
+不带 `--execute` 时程序只显示输入，不向 Lumos 下发运动目标；默认开启的 HD 按钮仍会控制 StarArm 主臂悬停/释放：
 
 ```bash
 python stararm102_lumos_teleop.py --can can0 --leader-port /dev/ttyUSB0 --gripper
@@ -99,6 +99,20 @@ python stararm102_lumos_teleop.py --can can0 --leader-port /dev/ttyUSB0 --grippe
 ```
 
 如果串口不是 `/dev/ttyUSB0`，替换为实际设备名。夹爪方向相反时，在预览和执行命令中都增加 `--invert-gripper`。使用 `Ctrl+C` 正常停止；发生卡滞、碰撞或持续力矩报警时，立即停止并使用硬件急停。
+
+## HD 按钮悬停
+
+HD 实体按钮功能默认开启，按钮板 ID 默认是 `7`。按钮反馈为 `180°` 时锁定主臂六个关节，其他状态释放，夹爪不参与锁定。程序在按钮状态变化时发送锁定/释放指令，并显示 `HD=悬停` 或 `HD=释放`。校准采集和遥操作循环均会读取按钮。
+
+按钮功能在预览模式也生效；`--execute` 仅控制是否向 Lumos 下发跟随目标。按钮板未响应时程序会报错退出。
+
+如果使用无 HD 按钮的主臂，在校准、预览和执行命令中都增加 `--button-disable`：
+
+```bash
+python stararm102_lumos_teleop.py --can can0 --leader-port /dev/ttyUSB0 --gripper --button-disable
+```
+
+按钮板使用其他 ID 时，增加 `--button-id ID`（允许范围 `7..253`）。也可在脚本顶部修改 `HD_BUTTON_ENABLED` 和 `HD_BUTTON_ID` 默认值；`--button-enable` 可显式开启按钮功能。
 
 ## 调整关节映射与速度
 
