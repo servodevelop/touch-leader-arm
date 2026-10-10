@@ -1,6 +1,6 @@
 # Star Arm 102 HD 主臂与 FL 从臂 LeRobot 集成
 
-本包包含 `stararm102_hd` 主臂遥操作接口和 `stararm102_fl` 从臂接口。代码来自指定的归档分支；本页在目标仓库中整理为中文说明。
+本包包含 `stararm102_hd` 主臂遥操作接口和 `stararm102_fl` 从臂接口。
 
 ## 安装
 
@@ -103,11 +103,11 @@ lerobot-find-cameras opencv
 --robot.cameras="{first_person: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}, third_person: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}}"
 ```
 
-采集、训练和策略运行步骤见 [中文教程](../stararm102.md)。归档版本的 ACT 模型及运行参数见 [夹方块示例](../examples/act_pick/README.md)；该示例使用相邻插件的类型名称，执行时按对应指南配置环境。
+采集、训练和策略运行步骤见 [中文教程](../stararm102.md)。ACT 模型及运行参数见 [夹方块示例](../examples/act_pick/README.md)，权重下载和演示见 [预训练模型仓库](https://github.com/VincentHSS/star-arm-102-act-model)；该示例使用相邻插件的类型名称，执行时按对应指南配置环境。
 
 ## 其他从臂
 
-归档示例也提供了 reBot Arm 102 的遥操作配置：
+reBot Arm 102 的遥操作配置：
 
 ```bash
 lerobot-teleoperate \

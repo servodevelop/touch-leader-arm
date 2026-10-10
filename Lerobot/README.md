@@ -13,4 +13,4 @@
 - [从臂插件](lerobot-robot-stararm102/README.md)
 - [ACT 夹方块示例](examples/act_pick/README.md)
 
-本目录提取自 `servodevelop/Star-Arm-102` 的 `codex/archive-main-before-phase-one-2026-10-03` 分支，来源提交为 `307a86d9e4b977305d33a386dc332874b21960d7`。代码保留归档版本，说明使用中文版；模型权重和视频链接继续指向来源仓库。
+- [ACT 方块放置预训练模型、下载与演示](https://github.com/VincentHSS/star-arm-102-act-model)

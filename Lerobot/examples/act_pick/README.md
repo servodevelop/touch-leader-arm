@@ -2,7 +2,7 @@
 
 这是使用 LeRobot 训练的 Star Arm 102 方块放置策略。模型输入包含机械臂状态，以及两路 640 × 480 相机画面：`up`（上方视角）和 `front`（正面视角）。训练完成于 100,000 步。
 
-下面直接列出客户需要执行的命令。动手前先看[训练场景摆放参考](#训练场景摆放参考)。可下载 [Word 版客户运行指南](docs/Star_Arm_102_ACT_客户运行指南.docx) 留存；完整模型在本仓库的 [act-pick-v1.0.0 Release](https://github.com/servodevelop/Star-Arm-102/releases/tag/act-pick-v1.0.0)。
+预训练模型与演示见 [Star Arm 102 ACT 方块放置模型仓库](https://github.com/VincentHSS/star-arm-102-act-model)。下面直接列出客户需要执行的命令。动手前先看[训练场景摆放参考](#训练场景摆放参考)。可下载 [Word 版客户运行指南](https://github.com/VincentHSS/star-arm-102-act-model/releases/download/v1.0.0/Star_Arm_102_ACT_Customer_Guide.docx) 留存；完整模型在 [v1.0.0 发布页](https://github.com/VincentHSS/star-arm-102-act-model/releases/tag/v1.0.0)。
 
 ## 下载和放置模型
 
@@ -10,7 +10,7 @@
 
 ```bash
 curl -L -o stararm102_pick_act_torch271.tar.gz \
-  https://github.com/servodevelop/Star-Arm-102/releases/download/act-pick-v1.0.0/stararm102_pick_act_torch271.tar.gz
+  https://github.com/VincentHSS/star-arm-102-act-model/releases/download/v1.0.0/stararm102_pick_act_torch271.tar.gz
 mkdir -p ~/models/stararm102_pick_act_torch271
 tar -xzf stararm102_pick_act_torch271.tar.gz -C ~/models/stararm102_pick_act_torch271
 ls ~/models/stararm102_pick_act_torch271/pretrained_model
@@ -92,9 +92,9 @@ lerobot-calibrate \
 
 点击下方播放器即可在线观看。请结合上方三张照片核对设备摆位，再进行数据采集或模型验证。
 
-https://github.com/user-attachments/assets/6774384d-f437-4aa9-a364-cd66eba965f7
+https://github.com/user-attachments/assets/cd992f85-65b6-42db-b179-1a9ba4041f03
 
-[下载原视频（MP4，约 61 MB）](https://github.com/servodevelop/Star-Arm-102/releases/download/act-pick-v1.0.0/stararm102_act_trained_demo.mp4)
+[下载原视频（MP4，约 61 MB）](https://github.com/VincentHSS/star-arm-102-act-model/releases/download/v1.0.0/stararm102_act_trained_demo.mp4)
 
 ## 单组验证示例
 

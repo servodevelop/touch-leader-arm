@@ -6,14 +6,15 @@
 
 ## LeRobot 资料与插件
 
-本分支另外收录了 [Star Arm 102 LeRobot 资料](Lerobot/README.md)，提取自 [`Star-Arm-102` 的归档分支](https://github.com/servodevelop/Star-Arm-102/tree/codex/archive-main-before-phase-one-2026-10-03/Lerobot)，来源提交为 `307a86d9e4b977305d33a386dc332874b21960d7`。
+本分支收录了 [Star Arm 102 LeRobot 资料](Lerobot/README.md)。
 
 - [中文教程](Lerobot/stararm102.md)
 - [HD 主臂与 FL 从臂集成及示例](Lerobot/lerobot-stararm102/README.md)
 - [主臂插件](Lerobot/lerobot-teleoperator-stararm102/README.md) / [从臂插件](Lerobot/lerobot-robot-stararm102/README.md)
 - [ACT 夹方块示例与运行指南](Lerobot/examples/act_pick/README.md)
+- [ACT 方块放置预训练模型、下载与演示](https://github.com/VincentHSS/star-arm-102-act-model)
 
-这些内容保留来源版本的代码、配置、图片和许可证，文档使用中文版。LeRobot 插件的安装步骤见各自教程；下方安装脚本用于 Lumos Python 遥操作。ACT 模型权重和视频仍从原仓库 Release 下载。
+LeRobot 插件的安装步骤见各自中文教程；下方安装脚本用于 Lumos Python 遥操作。ACT 模型权重和演示视频可从 [预训练模型发布页](https://github.com/VincentHSS/star-arm-102-act-model/releases/tag/v1.0.0) 下载。
 
 ## 硬件与环境
 
