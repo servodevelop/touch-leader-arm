@@ -120,10 +120,27 @@ python stararm102_lumos_teleop.py --can can0 --leader-port /dev/ttyUSB0 --grippe
 
 - `JOINT_SIGNS`：六个 Lumos 关节方向，`1` 同向、`-1` 反向。
 - `FOLLOW_GAIN`：主臂相对参考姿态的角度变化映射比例，范围 `(0, 1]`。
-- `MAX_STEP_DEG`：每个控制周期允许的最大目标角度变化。
+- `MAX_SPEED_DEG_PER_SEC`：按实际采样间隔计算的跟随速度上限，默认 `50°/秒`。
+- `MAX_TARGET_STEP_DEG`：单帧最大目标变化，默认 `2°`，防止长时间通信卡顿后出现大步追赶。
+- `FILTER_MIN_CUTOFF_HZ` / `FILTER_BETA`：关节角度自适应滤波，慢速时抑制噪声，快速运动时减少滤波延迟。夹爪不参与此滤波。
 - `CONTROL_RATE_HZ`：控制循环频率。
+- `STATUS_RATE_HZ`：终端状态打印频率，默认 `5 Hz`。
 
 修改后先使用预览模式确认，再谨慎执行。不要通过增大参数或修改 SDK 保护阈值来掩盖力矩报警。
+
+## 延迟与抖动诊断
+
+程序显示实际循环频率 `rate`、本轮主臂读取耗时 `read`、映射目标与已发送目标之间的最大关节差值 `target_gap`，以及读写工作超过设定周期的累计次数 `overruns`。`target_gap` 不代表从臂实际位置误差；`overruns` 不包含终端打印和日志写入耗时，实际采样间隔会包含这些开销。
+
+记录诊断文件时，在原有命令中增加 `--diagnostics-file`，例如：
+
+```bash
+python stararm102_lumos_teleop.py --can can0 --leader-port /dev/ttyUSB0 --gripper --execute --diagnostics-file outputs/teleop-diagnostics.csv
+```
+
+CSV 包含采样间隔、主臂读取与目标下发耗时、目标差值、六个主臂角度和六个下发目标。每次运行会覆盖指定文件，请为不同测试使用不同文件名。读取耗时偏高时先检查串口、SDK 与设备反馈；频率正常但 `target_gap` 持续增大，表示输入运动超过了跟随限速。默认速度上限保持原有 `50 Hz × 1°` 的水平，不会自动提高。
+
+改动已经过模拟验证，实际机械臂上的延迟与抖动改善需要现场复测。原有校准文件可继续使用。
 
 ## 仓库内容
 

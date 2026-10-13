@@ -14,6 +14,7 @@ joint order and direction with the arms clear and hardware E-stop reachable.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import sys
@@ -29,11 +30,48 @@ CALIBRATION_VERSION = 1
 # 顺序对应 Lumos 关节 1..6；1=同向，-1=反向。
 JOINT_SIGNS = (-1.0, 1.0, 1.0, 1.0, -1.0, -1.0)
 FOLLOW_GAIN = 1.0          # 主臂角度变化映射比例，范围 (0, 1]
-MAX_STEP_DEG = 1.0         # 每次循环最多追踪的角度，增大后跟随更快
+MAX_SPEED_DEG_PER_SEC = 50.0  # 按实际时间限速；保持原 50 Hz 时的速度上限
+MAX_TARGET_STEP_DEG = 2.0  # 单帧最大目标变化；通信卡顿后也不追赶大步
+FILTER_MIN_CUTOFF_HZ = 5.0  # 静止/慢速时抑制角度噪声
+FILTER_BETA = 0.15        # 快速运动时提高截止频率，减少滤波延迟
+STATUS_RATE_HZ = 5.0      # 状态打印频率，避免每帧刷新终端
 CONTROL_RATE_HZ = 50.0     # 读主臂/更新 Lumos 目标的循环频率
 HD_BUTTON_ENABLED = True  # 默认开启 HD 实体按钮悬停功能
 HD_BUTTON_ID = 7          # HD 按钮板 ID；不参与关节/夹爪映射
 # ================================================================
+
+
+class JointFilter:
+    """Adaptive low-pass filter in degrees; fast motion receives less smoothing."""
+
+    def __init__(self):
+        self.raw: list[float] | None = None
+        self.filtered: list[float] = []
+        self.speed: list[float] = []
+
+    def update(self, values: Sequence[float], dt: float) -> list[float]:
+        if not all(math.isfinite(value) for value in values):
+            raise RuntimeError("主臂返回无效角度，停止遥操作")
+        if self.raw is None:
+            self.raw = list(values)
+            self.filtered = list(values)
+            self.speed = [0.0] * len(values)
+            return self.filtered.copy()
+        dt = max(dt, 1e-6)
+        speed_alpha = dt / (dt + 1.0 / (2.0 * math.pi * 5.0))
+        for i, value in enumerate(values):
+            self.speed[i] += speed_alpha * ((value - self.raw[i]) / dt - self.speed[i])
+            cutoff = FILTER_MIN_CUTOFF_HZ + FILTER_BETA * abs(self.speed[i])
+            alpha = dt / (dt + 1.0 / (2.0 * math.pi * cutoff))
+            self.filtered[i] += alpha * (value - self.filtered[i])
+        self.raw = list(values)
+        return self.filtered.copy()
+
+
+def limit_target(previous: Sequence[float], desired: Sequence[float], dt: float) -> list[float]:
+    # Bound long gaps rather than converting a communication stall into a jump.
+    step = math.radians(min(MAX_TARGET_STEP_DEG, MAX_SPEED_DEG_PER_SEC * max(0.0, dt)))
+    return [old + max(-step, min(step, new - old)) for old, new in zip(previous, desired)]
 
 
 def parse_joint_map(value: str) -> tuple[int, ...]:
@@ -121,6 +159,8 @@ def main() -> int:
                         help="Reverse the calibrated gripper mapping if open/close moves the wrong way")
     parser.add_argument("--execute", action="store_true",
                         help="Send commands to Lumos; without this flag only print proposed targets")
+    parser.add_argument("--diagnostics-file", type=Path,
+                        help="Save loop timing and joint targets to CSV for delay diagnosis")
     button_group = parser.add_mutually_exclusive_group()
     button_group.add_argument("--button-enable", "--button_enable", dest="button_enabled",
                               action="store_true", help="Enable HD leader button (default: enabled)")
@@ -133,8 +173,13 @@ def main() -> int:
 
     if len(JOINT_SIGNS) != 6 or any(sign not in (-1.0, 1.0) for sign in JOINT_SIGNS):
         parser.error("JOINT_SIGNS must contain six values, each 1.0 or -1.0")
-    if not 0 < FOLLOW_GAIN <= 1 or MAX_STEP_DEG <= 0 or not 0 < CONTROL_RATE_HZ <= 100:
-        parser.error("Check FOLLOW_GAIN, MAX_STEP_DEG, and CONTROL_RATE_HZ at the top of the script")
+    parameters = (FOLLOW_GAIN, MAX_SPEED_DEG_PER_SEC, MAX_TARGET_STEP_DEG,
+                  CONTROL_RATE_HZ, FILTER_MIN_CUTOFF_HZ, FILTER_BETA, STATUS_RATE_HZ)
+    if (not all(math.isfinite(value) for value in parameters)
+            or not 0 < FOLLOW_GAIN <= 1 or MAX_SPEED_DEG_PER_SEC <= 0
+            or MAX_TARGET_STEP_DEG <= 0 or not 0 < CONTROL_RATE_HZ <= 100
+            or FILTER_MIN_CUTOFF_HZ <= 0 or FILTER_BETA < 0 or STATUS_RATE_HZ <= 0):
+        parser.error("Check motion, filter, and rate parameters at the top of the script")
 
     try:
         serial, uservo, SingleArm = load_sdk()
@@ -144,6 +189,7 @@ def main() -> int:
 
     leader_uart = None
     lumos = None
+    diagnostics_file = None
     try:
         leader_uart = serial.Serial(
             port=args.leader_port,
@@ -223,7 +269,7 @@ def main() -> int:
                 "joint_map": list(args.joint_map),
                 "signs": list(JOINT_SIGNS),
                 "gain": FOLLOW_GAIN,
-                "max_step_deg": MAX_STEP_DEG,
+                "max_speed_deg_per_sec": MAX_SPEED_DEG_PER_SEC,
                 "leader_home_deg": leader_home_deg,
                 "leader_range_min_deg": range_min,
                 "leader_range_max_deg": range_max,
@@ -257,7 +303,6 @@ def main() -> int:
         # not the old calibration JSON, so edits here always take effect.
         signs = JOINT_SIGNS
         gain = FOLLOW_GAIN
-        max_step_rad = math.radians(MAX_STEP_DEG)
         gripper_range = calibration["gripper_range"]
         previous_target = [float(value) for value in lumos.get_joint_positions()]
         if len(previous_target) != 6:
@@ -270,23 +315,44 @@ def main() -> int:
 
         print("EXECUTE: 正在控制 Lumos" if args.execute else "预览模式：只显示目标，不驱动 Lumos")
         print(f"校准文件：{args.calibration_file}")
-        print(f"固定参数：signs={list(JOINT_SIGNS)}, gain={FOLLOW_GAIN}, max_step={MAX_STEP_DEG}°/周期, rate={CONTROL_RATE_HZ}Hz")
+        print(f"固定参数：signs={list(JOINT_SIGNS)}, gain={FOLLOW_GAIN}, max_speed={MAX_SPEED_DEG_PER_SEC}°/秒, rate={CONTROL_RATE_HZ}Hz")
         print("Lumos 参考姿态 (rad)：", [round(v, 3) for v in lumos_home_rad])
         print("工作空间保持畅通；Ctrl+C 停止。")
 
         period = 1.0 / CONTROL_RATE_HZ
         next_tick = time.monotonic()
+        started = next_tick
+        last_sample = None
+        last_status = started
+        report_started = started
+        report_frames = 0
+        overrun_count = 0
+        joint_filter = JointFilter()
+        diagnostics = None
+        if args.diagnostics_file is not None:
+            args.diagnostics_file.parent.mkdir(parents=True, exist_ok=True)
+            diagnostics_file = args.diagnostics_file.open("w", newline="", encoding="utf-8")
+            diagnostics = csv.writer(diagnostics_file)
+            diagnostics.writerow(["elapsed_s", "sample_interval_ms", "read_ms", "send_ms",
+                                  "work_ms", "target_error_deg", "overrun"]
+                                 + [f"leader_j{i}_deg" for i in range(1, 7)]
+                                 + [f"target_j{i}_rad" for i in range(1, 7)])
         while True:
+            loop_started = time.monotonic()
             feedback = read_leader(leader, args.joint_map, args.gripper, hd_button)
+            sample_time = time.monotonic()
+            dt = period if last_sample is None else sample_time - last_sample
+            last_sample = sample_time
             leader_deg = feedback[:6]
+            filtered_deg = joint_filter.update(leader_deg, dt)
             clipped = [max(lo, min(hi, value))
-                       for value, lo, hi in zip(leader_deg, leader_min_deg, leader_max_deg)]
+                       for value, lo, hi in zip(filtered_deg, leader_min_deg, leader_max_deg)]
             delta_rad = [math.radians(now - home) for now, home in zip(clipped, leader_home_deg)]
             desired = [home + sign * gain * delta
                        for home, sign, delta in zip(lumos_home_rad, signs, delta_rad)]
-            target = [old + max(-max_step_rad, min(max_step_rad, new - old))
-                      for old, new in zip(previous_target, desired)]
+            target = limit_target(previous_target, desired, dt)
 
+            send_started = time.monotonic()
             if args.execute:
                 lumos.set_joint_raw(target, [0.0] * 6)
             previous_target = target
@@ -304,7 +370,28 @@ def main() -> int:
                 line += f" gripper={grip_ratio:.2f}"
                 if args.execute:
                     lumos.setGripperPosition(grip_ratio)
-            print(line, end="\r", flush=True)
+            send_finished = time.monotonic()
+            work_ms = (send_finished - loop_started) * 1000.0
+            target_error = math.degrees(max(abs(new - sent) for new, sent in zip(desired, target)))
+            overrun = work_ms > period * 1000.0
+            overrun_count += int(overrun)
+            report_frames += 1
+            if diagnostics is not None:
+                diagnostics.writerow([sample_time - started, dt * 1000.0,
+                                      (sample_time - loop_started) * 1000.0,
+                                      (send_finished - send_started) * 1000.0,
+                                      work_ms, target_error, int(overrun)] + leader_deg + target)
+            if send_finished - last_status >= 1.0 / STATUS_RATE_HZ:
+                actual_hz = report_frames / max(send_finished - report_started, 1e-6)
+                line += (f" rate={actual_hz:.1f}Hz read={(sample_time-loop_started)*1000:.1f}ms"
+                         f" target_gap={target_error:.1f}° overruns={overrun_count}")
+                print(line, end="\r", flush=True)
+                last_status = send_finished
+                if diagnostics_file is not None:
+                    diagnostics_file.flush()
+                if send_finished - report_started >= 1.0:
+                    report_frames = 0
+                    report_started = send_finished
 
             next_tick += period
             delay = next_tick - time.monotonic()
@@ -320,6 +407,8 @@ def main() -> int:
         print(f"\n运行失败：{exc}", file=sys.stderr)
         return 1
     finally:
+        if diagnostics_file is not None:
+            diagnostics_file.close()
         if lumos is not None:
             try:
                 lumos.cleanup()
