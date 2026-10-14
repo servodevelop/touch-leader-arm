@@ -22,10 +22,6 @@
 
 [查看：先预览，再执行](README.md#teleoperation)
 
-<a id="arguments"></a>
-
-[查看：命令行参数说明](README.md#arguments)
-
 <a id="hd-button"></a>
 
 [查看：HD 按钮悬停](README.md#hd-button)
@@ -33,10 +29,6 @@
 <a id="configuration"></a>
 
 [查看：调整关节映射与速度](README.md#configuration)
-
-<a id="diagnostics"></a>
-
-[查看：延迟与抖动诊断](README.md#diagnostics)
 
 <a id="directory-structure"></a>
 
