@@ -17,10 +17,12 @@ import argparse
 import csv
 import json
 import math
+import os
 import sys
 import threading
 import time
 from pathlib import Path
+from contextlib import contextmanager
 from typing import Sequence
 
 LEADER_JOINT_IDS = (0, 1, 2, 3, 4, 5)
@@ -134,6 +136,32 @@ def load_sdk():
     return serial, uservo, SingleArm
 
 
+def find_sdk_root(explicit: Path | None = None) -> Path | None:
+    script_dir = Path(__file__).resolve().parent
+    candidates = ([explicit] if explicit is not None else [
+        script_dir / ".dependencies" / "startouch_sdk",
+        script_dir / "startouch_sdk", Path.cwd(), Path.cwd() / "startouch_sdk",
+    ])
+    for candidate in candidates:
+        root = candidate.expanduser().resolve()
+        if (root / "src" / "config" / "robot_kinematics.yaml").is_file():
+            return root
+    if explicit is not None:
+        raise RuntimeError(f"SDK 配置不存在：{explicit}/src/config/robot_kinematics.yaml")
+    return None
+
+
+@contextmanager
+def sdk_initialization_directory(root: Path | None):
+    original = Path.cwd()
+    try:
+        if root is not None:
+            os.chdir(root)
+        yield
+    finally:
+        os.chdir(original)
+
+
 def print_joint_ranges(range_min: Sequence[float], range_max: Sequence[float]) -> None:
     print("\n┌────────┬────────────┬────────────┬────────────┐")
     print("│ 关节   │ 最小角度° │ 最大角度° │ 范围°     │")
@@ -147,6 +175,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Star Arm 102 leader -> Lumos arm teleoperation")
     parser.add_argument("--leader-port", default="/dev/ttyUSB0", help="Star Arm 102 leader UART port")
     parser.add_argument("--can", default="can0", help="Lumos CAN interface")
+    parser.add_argument("--sdk-root", type=Path,
+                        help="Lumos SDK source root containing src/config/robot_kinematics.yaml")
     parser.add_argument("--joint-map", type=parse_joint_map, default=(0, 1, 2, 3, 4, 5),
                         help="StarArm servo IDs corresponding to Lumos joints 1..6")
     parser.add_argument("--calibration-file", type=Path,
@@ -170,6 +200,10 @@ def main() -> int:
     parser.add_argument("--button-id", "--button_id", type=int, choices=range(7, 254),
                         default=HD_BUTTON_ID, metavar="ID", help="HD button board ID, 7..253 (default: 7)")
     args = parser.parse_args()
+    # Keep user paths relative to the launch directory, not the SDK directory.
+    args.calibration_file = args.calibration_file.expanduser().resolve()
+    if args.diagnostics_file is not None:
+        args.diagnostics_file = args.diagnostics_file.expanduser().resolve()
 
     if len(JOINT_SIGNS) != 6 or any(sign not in (-1.0, 1.0) for sign in JOINT_SIGNS):
         parser.error("JOINT_SIGNS must contain six values, each 1.0 or -1.0")
@@ -182,6 +216,7 @@ def main() -> int:
         parser.error("Check motion, filter, and rate parameters at the top of the script")
 
     try:
+        sdk_root = find_sdk_root(args.sdk_root)
         serial, uservo, SingleArm = load_sdk()
     except RuntimeError as exc:
         print(exc, file=sys.stderr)
@@ -211,7 +246,19 @@ def main() -> int:
             print("请先将 Star Arm 102 与 Lumos 摆到对应的遥操作参考姿态。")
             print("Lumos 连接时会使能电机；确认急停可用、工作区域畅通。")
             input("准备好后按 Enter 连接并记录参考姿态……")
-        lumos = SingleArm(can_interface_=args.can, gripper=args.gripper, enable_fd_=False)
+        if sdk_root is not None:
+            print(f"Lumos SDK 配置：{sdk_root / 'src/config/robot_kinematics.yaml'}")
+        try:
+            with sdk_initialization_directory(sdk_root):
+                lumos = SingleArm(can_interface_=args.can, gripper=args.gripper, enable_fd_=False)
+        except Exception as exc:
+            if "Failed to locate config file" in str(exc):
+                raise RuntimeError(
+                    "Lumos SDK 找不到配置。请检查 .dependencies/startouch_sdk/src/config/robot_kinematics.yaml；"
+                    "SDK 在其他目录时，加 --sdk-root /实际路径/startouch_sdk。\n"
+                    f"原始错误：{exc}"
+                ) from exc
+            raise
         time.sleep(2.0)
 
         if args.calibrate:

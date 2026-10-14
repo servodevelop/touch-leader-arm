@@ -18,6 +18,24 @@ spec.loader.exec_module(teleop)
 
 
 class FollowControlTests(unittest.TestCase):
+    def test_sdk_root_discovery_and_initialization_directory(self):
+        original = Path.cwd()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "startouch_sdk"
+            config = root / "src/config/robot_kinematics.yaml"
+            config.parent.mkdir(parents=True)
+            config.write_text("test: true", encoding="utf-8")
+            self.assertEqual(teleop.find_sdk_root(root), root.resolve())
+            with patch.object(teleop, "__file__", str(Path(directory) / "teleop.py")):
+                self.assertEqual(teleop.find_sdk_root(), root.resolve())
+            with self.assertRaisesRegex(RuntimeError, "初始化失败"):
+                with teleop.sdk_initialization_directory(root):
+                    self.assertEqual(Path.cwd(), root.resolve())
+                    raise RuntimeError("初始化失败")
+            self.assertEqual(Path.cwd(), original)
+            with self.assertRaises(RuntimeError):
+                teleop.find_sdk_root(Path(directory) / "missing")
+
     def test_speed_independent_of_normal_loop_rate(self):
         for hz in (25, 50, 100):
             with self.subTest(hz=hz):

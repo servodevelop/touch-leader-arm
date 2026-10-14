@@ -84,6 +84,25 @@ python stararm102_lumos_teleop.py --calibrate --can can0 --leader-port /dev/ttyU
 
 校准文件默认保存在 `~/.config/stararm102_lumos/calibration.json`。若不使用夹爪，从校准和后续命令中一并删除 `--gripper`。
 
+### SDK 配置文件找不到
+
+Lumos SDK 初始化需要源码目录内的 `src/config/robot_kinematics.yaml`。安装后请保留 `.dependencies/startouch_sdk` 目录；脚本会自动定位这份配置，并在 SDK 目录中完成初始化，再恢复启动目录。不要把 YAML 单独复制到项目根目录或 `site-packages`。
+
+SDK 位于其他位置时，在运行命令中指定源码根目录：
+
+```bash
+python stararm102_lumos_teleop.py --calibrate --can can0 --leader-port /dev/ttyUSB0 --gripper --sdk-root /实际路径/startouch_sdk
+```
+
+若仍使用旧脚本，可以先从 SDK 目录启动，脚本路径填写为绝对路径：
+
+```bash
+PROJECT_DIR="$PWD"
+test -f "$PROJECT_DIR/.dependencies/startouch_sdk/src/config/robot_kinematics.yaml"
+cd "$PROJECT_DIR/.dependencies/startouch_sdk"
+python "$PROJECT_DIR/stararm102_lumos_teleop.py" --calibrate --can can0 --leader-port /dev/ttyUSB0 --gripper
+```
+
 ## 先预览，再执行
 
 不带 `--execute` 时程序只显示输入，不向 Lumos 下发运动目标；默认开启的 HD 按钮仍会控制 StarArm 主臂悬停/释放：
