@@ -1,0 +1,3 @@
+# Preserve CAD exports byte-for-byte and avoid line-based diffs and merges.
+*.stp binary
+*.step binary

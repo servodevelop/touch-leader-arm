@@ -1,0 +1,51 @@
+# Touch Leader Arm
+
+<sub>[English](README.md) / **简体中文**</sub>
+
+Touch Leader Arm 硬件资源，以及 Star Arm 102 → Lumos 的 Python 遥操作资源。
+
+## 资源入口
+
+| 任务 | 入口 | 状态 |
+| --- | --- | --- |
+| 查看硬件规格与 CAD 资料 | [硬件资源](hardware/) | 已提供 V3.1 装配体 STEP；其他资料待补 |
+| 查阅装配、校准与使用指南 | [文档中心](docs/) | 已有中文遥操作指南；其他指南待补 |
+| 安装依赖并运行遥操作 | [Python SDK](python-sdk/) | 已有 Star Arm 102 → Lumos 脚本与指南；Touch Leader Arm V3.1 兼容性尚未验证 |
+
+## 仓库结构
+
+```text
+.
+├── README.md
+├── README.zh.md
+├── hardware/
+│   └── touch-leader-arm/
+│       ├── step/
+│       │   ├── assembly/
+│       │   └── parts/
+│       ├── printing/
+│       │   ├── stl/
+│       │   └── 3mf/
+│       ├── drawings/
+│       └── robot-description/
+├── docs/
+│   ├── README.md
+│   ├── README.zh.md
+│   └── StarArm102_Lumos_Python_Teleoperation_Guide.docx
+├── python-sdk/
+│   ├── stararm102_lumos_teleop.py
+│   └── scripts/
+└── scripts/
+```
+
+## 文档检查
+
+在仓库根目录执行：
+
+```bash
+python -m pip install -r scripts/requirements-docs.txt
+python scripts/check_docs.py
+python scripts/check_readme_sync.py
+```
+
+这些检查覆盖本地文件链接与双语 README 结构。翻译语义、CAD 几何和硬件实际运行需要另外验证。
