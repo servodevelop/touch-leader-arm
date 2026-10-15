@@ -13,7 +13,7 @@ from mathutils import Vector, Matrix
 import math
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL = ROOT / 'hardware/touch-leader-arm'
+MODEL = ROOT / 'hardware'
 
 
 def main():

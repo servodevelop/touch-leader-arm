@@ -20,15 +20,15 @@ Touch R1 Leader Arm 硬件资源，以及 Star Arm 102 → Lumos 的 Python 遥�
 .
 ├── README.md
 ├── hardware/
-│   └── touch-leader-arm/
-│       ├── step/
-│       │   ├── assembly/
-│       │   └── parts/
-│       ├── printing/
-│       │   ├── stl/
-│       │   └── 3mf/
-│       ├── drawings/
-│       └── robot-description/
+│   ├── bom.json
+│   ├── step/
+│   │   ├── assembly/
+│   │   └── parts/
+│   ├── printing/
+│   │   ├── stl/
+│   │   └── 3mf/
+│   ├── drawings/
+│   └── robot-description/
 ├── docs/
 │   ├── README.md
 │   └── StarArm102_Lumos_Python_Teleoperation_Guide.docx

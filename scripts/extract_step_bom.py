@@ -17,7 +17,7 @@ import Part
 from fastener_specs import describe_fastener
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL = ROOT / 'hardware/touch-leader-arm'
+MODEL = ROOT / 'hardware'
 SOURCE = MODEL / 'step/assembly/touch-leader-arm-v3.1-1013.stp'
 SOURCE_SHA256 = 'af5f44cd08a8293b5a976a71977836e1e3b505324ef570e67f32b18da1b52e1f'
 

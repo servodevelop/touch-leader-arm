@@ -16,7 +16,7 @@ python scripts/check_readme_sync.py
 
 ## 重新生成 CAD BOM 与简图
 
-[硬件 BOM](../hardware/touch-leader-arm/README.md#bill-of-materials) 根据以校验值锁定的 V3.1 装配体提取。`extract_step_bom.py` 需要可导入 FreeCAD、Part、Import 的 Python 环境；`render_bom.py` 在 Blender 内运行。生成资源已使用 FreeCAD 1.1.4 和 Blender 5.2.2 检查。
+[硬件 BOM](../hardware/README.md#bill-of-materials) 根据以校验值锁定的 V3.1 装配体提取。`extract_step_bom.py` 需要可导入 FreeCAD、Part、Import 的 Python 环境；`render_bom.py` 在 Blender 内运行。生成资源已使用 FreeCAD 1.1.4 和 Blender 5.2.2 检查。
 
 在 macOS 上，FreeCAD 与 Blender 安装于 `/Applications` 时，在仓库根目录执行：
 
