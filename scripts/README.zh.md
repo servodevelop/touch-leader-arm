@@ -1,0 +1,37 @@
+# 仓库维护脚本
+
+[← 首页](../README.zh.md)　|　<sub>[English](README.md) / **简体中文**</sub>
+
+## 文档检查
+
+使用 Python 3.10 或更新版本，在仓库根目录执行：
+
+```bash
+python -m pip install -r scripts/requirements-docs.txt
+python scripts/check_docs.py
+python scripts/check_readme_sync.py
+```
+
+检查覆盖本地文件／图片链接及双语 README 结构；翻译语义需要人工复核。
+
+## 重新生成 CAD BOM 与简图
+
+[硬件 BOM](../hardware/touch-leader-arm/README.zh.md#bill-of-materials) 根据以校验值锁定的 V3.1 装配体提取。`extract_step_bom.py` 需要可导入 FreeCAD、Part、Import 的 Python 环境；`render_bom.py` 在 Blender 内运行。生成资源已使用 FreeCAD 1.1.4 和 Blender 5.2.2 检查。
+
+在 macOS 上，FreeCAD 与 Blender 安装于 `/Applications` 时，在仓库根目录执行：
+
+```bash
+PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
+  /Applications/FreeCAD.app/Contents/Resources/bin/python \
+  scripts/extract_step_bom.py --mesh-dir /tmp/touch-r1-bom-meshes
+
+/Applications/Blender.app/Contents/MacOS/Blender \
+  --background --factory-startup --python scripts/render_bom.py -- \
+  --mesh-dir /tmp/touch-r1-bom-meshes
+```
+
+第一条命令重新生成 16 份 `step/parts/` 导出件及 `bom.json`；第二条生成 17 张图片（16 项 BOM 及装配体）。临时三角网格保存在仓库外，不改写装配体源文件。重复的源 PRODUCT 引用按实例计数；舵机内部零件保留在子装配内。外形相似但源 PRODUCT 标识不同的组件不会自动合并。
+
+导出件会重新导入，检查形体有效性、实体数，以及包围尺寸差小于 0.001 mm、体积差不超过 0.001 mm³ 与 0.01% 中的较大值。源 CAD 公差和实测误差保留在 `bom.json`。这些数值检查阈值不是制造公差。独立导出时移除组件在总装中的位置变换，保留子装配内部的位置变换。
+
+装配体变更后，先复核源编号与 BOM 范围，再更新锁定的 SHA-256 和项目映射。STEP 引用解析器仅针对这份 Creo 导出文件。脚本不改写 README 表格：重新生成数据后需同步中英文表格，逐张检查图片并运行文档检查。

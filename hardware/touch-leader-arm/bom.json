@@ -1,0 +1,1443 @@
+{
+  "schema_version": 1,
+  "model": "Touch R1 Leader Arm",
+  "revision": "V3.1",
+  "source_file": "step/assembly/touch-leader-arm-v3.1-1013.stp",
+  "source_sha256": "af5f44cd08a8293b5a976a71977836e1e3b505324ef570e67f32b18da1b52e1f",
+  "source_length_unit": "mm",
+  "root_product_entity": 101615,
+  "root_definition_entity": 101617,
+  "top_level_occurrences": 21,
+  "unique_bom_items": 16,
+  "expanded_leaf_occurrences": 99,
+  "assembly_geometry": {
+    "solid_count": 99,
+    "valid": true,
+    "volume_mm3": 614394.0731963499,
+    "local_bbox_mm": [
+      105.0000359643,
+      191.51444620828417,
+      305.1327813215521
+    ]
+  },
+  "export_check_tolerances": {
+    "relative_volume": 0.0001,
+    "absolute_volume_mm3": 0.001,
+    "bbox_mm": 0.001
+  },
+  "quantity_basis": "Direct children of the assembly root; repeated PRODUCT references grouped. Servo internals excluded from additional BOM rows.",
+  "procurement_status": "CAD-derived; specifications, omitted components and completeness require engineering confirmation.",
+  "items": [
+    {
+      "no": 1,
+      "id": "touch-r1-servo-rp8-u45h-m-c028",
+      "name_en": "Servo subassembly",
+      "name_zh": "舵机子装配",
+      "source_product_entity": 28683,
+      "source_name": "RP8-U45H-M-C028_STEP_ASM",
+      "decoded_source_name": "RP8-U45H-M-C028_STEP_ASM",
+      "quantity": 3,
+      "unit": "subassembly",
+      "step_file": "step/parts/touch-r1-servo-rp8-u45h-m-c028.step",
+      "image": "images/touch-r1-servo-rp8-u45h-m-c028.png",
+      "geometry": {
+        "solid_count": 14,
+        "valid": true,
+        "volume_mm3": 9112.260499582286,
+        "local_bbox_mm": [
+          40.10099483394926,
+          45.80000000000356,
+          20.209129648679877
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.002687723576375987,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 6.952443280522475e-07,
+      "export_bbox_max_error_mm": 8.256506589532364e-12,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 28686,
+          "source_definition_entity": 28685,
+          "imported_label": "RP8-U45H-M-C028_STEP_ASM",
+          "placement_matrix": [
+            -0.005424275513599808,
+            -0.0,
+            -0.9999852885093624,
+            40.0996384115,
+            0.0,
+            1.0,
+            -0.0,
+            -26.55585726272,
+            0.9999852885093624,
+            0.0,
+            -0.005424275513599808,
+            9.915086688429,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "source_occurrence_entity": 86282,
+          "source_definition_entity": 28685,
+          "imported_label": "RP8-U45H-M-C028_STEP_ASM001",
+          "placement_matrix": [
+            0.005424277718157677,
+            1.1532824973084857e-15,
+            0.9999852884974042,
+            -40.19963853005,
+            2.1261494289790092e-13,
+            -1.0000000000000004,
+            -1.213685624573091e-30,
+            127.070303471,
+            0.9999852884974042,
+            2.1261181501261652e-13,
+            -0.005424277718157899,
+            -53.77005969849,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "source_occurrence_entity": 90676,
+          "source_definition_entity": 28685,
+          "imported_label": "RP8-U45H-M-C028_STEP_ASM002",
+          "placement_matrix": [
+            0.005424275513594701,
+            -2.2046058597455262e-09,
+            0.9999852885093623,
+            -40.19963852067,
+            -0.9999852885093623,
+            -2.1338486533295509e-13,
+            0.005424275513594708,
+            67.84935951985,
+            -1.1745046696384594e-11,
+            -1.0,
+            -2.2045745229348768e-09,
+            -49.51428912419,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "id": "touch-r1-servo-25-50kg-0001",
+      "name_en": "Servo subassembly (model unconfirmed)",
+      "name_zh": "舵机子装配（型号待确认）",
+      "source_product_entity": 55700,
+      "source_name": "_25-50KG-0001_ASM_ASM",
+      "decoded_source_name": "_25-50KG-0001_ASM_ASM",
+      "quantity": 3,
+      "unit": "subassembly",
+      "step_file": "step/parts/touch-r1-servo-25-50kg-0001.step",
+      "image": "images/touch-r1-servo-25-50kg-0001.png",
+      "geometry": {
+        "solid_count": 14,
+        "valid": true,
+        "volume_mm3": 10052.789651106656,
+        "local_bbox_mm": [
+          40.10034909030999,
+          52.6,
+          20.20912699878175
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.002613290455982457,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 8.438354375129459e-07,
+      "export_bbox_max_error_mm": 1.8474111129762605e-13,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 55703,
+          "source_definition_entity": 55702,
+          "imported_label": "_25-50KG-0001_ASM_ASM",
+          "placement_matrix": [
+            -2.220446049250313e-16,
+            -1.0000000000000002,
+            2.7843253337252394e-18,
+            6.45585726272,
+            -0.9378235850181376,
+            -2.220446049250313e-16,
+            0.34711226337271395,
+            16.73712679936,
+            -0.34711226337271395,
+            -2.7843253337252394e-18,
+            -0.9378235850181378,
+            19.35673856701,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "source_occurrence_entity": 66092,
+          "source_definition_entity": 55702,
+          "imported_label": "_25-50KG-0001_ASM_ASM001",
+          "placement_matrix": [
+            -2.2045658631952847e-09,
+            -1.0000000000000002,
+            1.195688126779326e-11,
+            6.355857573072,
+            0.005424275513360769,
+            -1.7763568394002505e-15,
+            0.9999852885093637,
+            -0.3351922028364,
+            -0.9999852885093637,
+            2.2045980265407097e-09,
+            0.005424275513360666,
+            140.7797668227,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "source_occurrence_entity": 77342,
+          "source_definition_entity": 55702,
+          "imported_label": "_25-50KG-0001_ASM_ASM002",
+          "placement_matrix": [
+            2.204566640351402e-09,
+            1.0000000000000002,
+            -1.1959965434566142e-11,
+            -6.455857273809,
+            0.005424275513709818,
+            1.4432899320127035e-15,
+            0.9999852885093619,
+            38.41480779678,
+            0.9999852885093619,
+            -2.2045993471072905e-09,
+            -0.005424275513709942,
+            -5.025059772864,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "id": "touch-r1-joint-1",
+      "name_en": "Joint 1 structure",
+      "name_zh": "关节 1 结构件",
+      "source_product_entity": 7112,
+      "source_name": "_X2_51738282_X0_1_NEW",
+      "decoded_source_name": "关节1_NEW",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-1.step",
+      "image": "images/touch-r1-joint-1.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 140700.69700584133,
+        "local_bbox_mm": [
+          120.03447515176,
+          56.00000000007688,
+          120.02276070238
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.003757462965656674,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.282465209282209e-13,
+      "export_bbox_max_error_mm": 7.105427357601002e-15,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 7120,
+          "source_definition_entity": 7114,
+          "imported_label": "_X2_51738282_X0_1_NEW",
+          "placement_matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "id": "touch-r1-joint-2",
+      "name_en": "Joint 2 structure",
+      "name_zh": "关节 2 结构件",
+      "source_product_entity": 35211,
+      "source_name": "_X2_51738282_X0_2__X2_65B0_X0_",
+      "decoded_source_name": "关节2_新",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-2.step",
+      "image": "images/touch-r1-joint-2.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 16809.91950125832,
+        "local_bbox_mm": [
+          69.26757314953,
+          27.416152789353248,
+          46.154772957830005
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.008004395718210593,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 9.794022565224745e-12,
+      "export_bbox_max_error_mm": 2.0250467969162855e-13,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 35216,
+          "source_definition_entity": 35213,
+          "imported_label": "_X2_51738282_X0_2__X2_65B0_X0_",
+          "placement_matrix": [
+            2.220446049250313e-16,
+            0.0,
+            1.0,
+            4.584683066522e-14,
+            0.0,
+            1.0,
+            0.0,
+            6.1,
+            -1.0,
+            0.0,
+            2.220446049250313e-16,
+            0.004999999998409,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "id": "touch-r1-joint-3",
+      "name_en": "Joint 3 structure",
+      "name_zh": "关节 3 结构件",
+      "source_product_entity": 66078,
+      "source_name": "_X2_51738282_X0_3",
+      "decoded_source_name": "关节3",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-3.step",
+      "image": "images/touch-r1-joint-3.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 117517.52135064575,
+        "local_bbox_mm": [
+          170.96262221107276,
+          30.306981608187037,
+          61.64784400584789
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.01826507030015742,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 6.318365533708427e-06,
+      "export_bbox_max_error_mm": 7.105427357601002e-15,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 66083,
+          "source_definition_entity": 66080,
+          "imported_label": "_X2_51738282_X0_3",
+          "placement_matrix": [
+            2.2045977265960914e-09,
+            -2.3035408363249276e-22,
+            -1.0,
+            -0.2999999998678,
+            2.0897606539094594e-13,
+            1.0,
+            2.3035408363249276e-22,
+            -33.36055379136,
+            1.0,
+            -2.0897606539094594e-13,
+            2.2045977265960914e-09,
+            0.06485352575908,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "id": "touch-r1-joint-4",
+      "name_en": "Joint 4 structure",
+      "name_zh": "关节 4 结构件",
+      "source_product_entity": 77328,
+      "source_name": "_X2_51738282_X0_4",
+      "decoded_source_name": "关节4",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-4.step",
+      "image": "images/touch-r1-joint-4.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 117503.58029575355,
+        "local_bbox_mm": [
+          167.35348620665022,
+          70.37525681347066,
+          63.64784400584789
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.011561009569284634,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 4.776249029940067e-06,
+      "export_bbox_max_error_mm": 3.979039320256561e-13,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 77333,
+          "source_definition_entity": 77330,
+          "imported_label": "_X2_51738282_X0_4",
+          "placement_matrix": [
+            2.2045993919306284e-09,
+            -2.3028533585733096e-22,
+            -1.0,
+            1.320507063703e-10,
+            2.0891355337111463e-13,
+            1.0,
+            2.3028533585733096e-22,
+            -33.36055379171,
+            1.0,
+            -2.0891355337111463e-13,
+            2.2045993919306284e-09,
+            0.06485352449573,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "id": "touch-r1-joint-5",
+      "name_en": "Joint 5 structure",
+      "name_zh": "关节 5 结构件",
+      "source_product_entity": 86268,
+      "source_name": "_X2_51738282_X0_5_NEW",
+      "decoded_source_name": "关节5_NEW",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-5.step",
+      "image": "images/touch-r1-joint-5.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 33553.36666414965,
+        "local_bbox_mm": [
+          69.51882605431416,
+          53.851238427179474,
+          82.99999999999864
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.010711089958440025,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.0859944927580452e-05,
+      "export_bbox_max_error_mm": 3.0169644560373854e-11,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 86273,
+          "source_definition_entity": 86270,
+          "imported_label": "_X2_51738282_X0_5_NEW",
+          "placement_matrix": [
+            1.0,
+            2.2983360054857953e-22,
+            -2.20459881027e-09,
+            -0.1000001431672,
+            -2.2983360054857953e-22,
+            -1.0,
+            -2.085037871543e-13,
+            115.0144462083,
+            -2.20459881027e-09,
+            2.085037871543e-13,
+            -1.0,
+            -64.93514647532,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 8,
+      "id": "touch-r1-joint-6",
+      "name_en": "Joint 6 structure",
+      "name_zh": "关节 6 结构件",
+      "source_product_entity": 90662,
+      "source_name": "_X2_51738282_X0_6_NEW",
+      "decoded_source_name": "关节6_NEW",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-6.step",
+      "image": "images/touch-r1-joint-6.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 13406.457351416237,
+        "local_bbox_mm": [
+          46.20000000000133,
+          25.75,
+          51.70000000000009
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.0015774734607027305,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.7245311654099462e-06,
+      "export_bbox_max_error_mm": 1.4210854715202004e-13,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 90667,
+          "source_definition_entity": 90664,
+          "imported_label": "_X2_51738282_X0_6_NEW",
+          "placement_matrix": [
+            2.2046025005550973e-09,
+            -1.0,
+            -6.074186243006308e-19,
+            -12.3500001234,
+            2.0938866997832223e-13,
+            0.0,
+            -1.0,
+            68.11444620828,
+            1.0,
+            2.2046024999475634e-09,
+            2.0938806244430452e-13,
+            -55.9701464483,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 9,
+      "id": "touch-r1-joint-7",
+      "name_en": "Joint 7 handle structure",
+      "name_zh": "关节 7 手柄结构件",
+      "source_product_entity": 98686,
+      "source_name": "_X2_51738282_X0_7",
+      "decoded_source_name": "关节7",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-joint-7.step",
+      "image": "images/touch-r1-joint-7.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 111048.75703157084,
+        "local_bbox_mm": [
+          65.25151420343,
+          135.66341759719,
+          51.22392200292394
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.00953112800343166,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.346110727767584e-06,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 98691,
+          "source_definition_entity": 98688,
+          "imported_label": "_X2_51738282_X0_7",
+          "placement_matrix": [
+            2.20460172339898e-09,
+            -1.3781432295030499e-05,
+            -0.999999999905036,
+            -0.09849017049106,
+            2.1046786127950282e-13,
+            0.9999999999050361,
+            -1.3781432295030499e-05,
+            -31.7968037823,
+            1.0,
+            -1.8008529273182463e-13,
+            2.2046016123766776e-09,
+            -5.68264647524,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 10,
+      "id": "touch-r1-spacer",
+      "name_en": "Spacer",
+      "name_zh": "垫片",
+      "source_product_entity": 29465,
+      "source_name": "_X2_57AB7247_X0_",
+      "decoded_source_name": "垫片",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-spacer.step",
+      "image": "images/touch-r1-spacer.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 413.6692126614357,
+        "local_bbox_mm": [
+          20.0,
+          2.3,
+          20.0
+        ]
+      },
+      "source_shape_max_tolerance_mm": 1e-07,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 0.0,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 29470,
+          "source_definition_entity": 29467,
+          "imported_label": "_X2_57AB7247_X0_",
+          "placement_matrix": [
+            0.9982369836694827,
+            0.0,
+            0.059354228446278974,
+            5.000966595899e-14,
+            0.0,
+            1.0,
+            0.0,
+            3.8,
+            -0.059354228446278974,
+            0.0,
+            0.9982369836694827,
+            0.004999999998358,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 11,
+      "id": "touch-r1-part-a000",
+      "name_en": "Bracket A000 (function unconfirmed)",
+      "name_zh": "支架 A000（用途待确认）",
+      "source_product_entity": 100621,
+      "source_name": "A000",
+      "decoded_source_name": "A000",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-part-a000.step",
+      "image": "images/touch-r1-part-a000.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 3973.9304252540574,
+        "local_bbox_mm": [
+          41.119102035,
+          41.76444620867,
+          8.000000000000021
+        ]
+      },
+      "source_shape_max_tolerance_mm": 1e-07,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.3731916834675585e-13,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 100626,
+          "source_definition_entity": 100623,
+          "imported_label": "A000",
+          "placement_matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 12,
+      "id": "touch-r1-part-b000",
+      "name_en": "Bracket B000 (function unconfirmed)",
+      "name_zh": "支架 B000（用途待确认）",
+      "source_product_entity": 101587,
+      "source_name": "B000",
+      "decoded_source_name": "B000",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-part-b000.step",
+      "image": "images/touch-r1-part-b000.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 1604.2245409272623,
+        "local_bbox_mm": [
+          10.0,
+          22.11471019338797,
+          13.509797288670507
+        ]
+      },
+      "source_shape_max_tolerance_mm": 0.0028728780811583376,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 8.419018645308434e-14,
+      "export_bbox_max_error_mm": 4.263256414560601e-13,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 101592,
+          "source_definition_entity": 101589,
+          "imported_label": "B000",
+          "placement_matrix": [
+            1.0,
+            -7.085461513302e-10,
+            1.946709809979e-09,
+            4.53809787085e-08,
+            7.085461513302e-10,
+            1.0,
+            6.896668718086827e-19,
+            -13.92836969422,
+            -1.946709809979e-09,
+            6.896668718086827e-19,
+            1.0,
+            -28.50417278048,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 13,
+      "id": "touch-r1-fastener-prt0001",
+      "name_en": "Socket-head fastener PRT0001",
+      "name_zh": "内六角紧固件 PRT0001",
+      "source_product_entity": 35916,
+      "source_name": "PRT0001",
+      "decoded_source_name": "PRT0001",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-fastener-prt0001.step",
+      "image": "images/touch-r1-fastener-prt0001.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 68.9396323293472,
+        "local_bbox_mm": [
+          5.5,
+          5.5,
+          6.0
+        ]
+      },
+      "source_shape_max_tolerance_mm": 1.8317530894370092e-06,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.442943335281869e-15,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 35921,
+          "source_definition_entity": 35918,
+          "imported_label": "PRT0001",
+          "placement_matrix": [
+            1.0,
+            -0.0,
+            0.0,
+            6.0,
+            0.0,
+            2.220446049250313e-16,
+            1.0,
+            8.0,
+            -0.0,
+            -1.0,
+            2.220446049250313e-16,
+            39.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 14,
+      "id": "touch-r1-fastener-prt0002",
+      "name_en": "Socket-head fastener PRT0002",
+      "name_zh": "内六角紧固件 PRT0002",
+      "source_product_entity": 36620,
+      "source_name": "PRT0002",
+      "decoded_source_name": "PRT0002",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-fastener-prt0002.step",
+      "image": "images/touch-r1-fastener-prt0002.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 68.93963233820621,
+        "local_bbox_mm": [
+          5.5,
+          5.5,
+          6.0
+        ]
+      },
+      "source_shape_max_tolerance_mm": 1.831483730128263e-06,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 8.245390486265403e-16,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 36625,
+          "source_definition_entity": 36622,
+          "imported_label": "PRT0002",
+          "placement_matrix": [
+            1.0,
+            -0.0,
+            0.0,
+            -6.0,
+            0.0,
+            2.220446049250313e-16,
+            1.0,
+            8.0,
+            -0.0,
+            -1.0,
+            2.220446049250313e-16,
+            39.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 15,
+      "id": "touch-r1-fastener-gb-t70-1-m3x400",
+      "name_en": "Socket-head fastener GB_T70_1-M3X400",
+      "name_zh": "内六角紧固件 GB_T70_1-M3X400",
+      "source_product_entity": 99391,
+      "source_name": "GB_T70_1-M3X400",
+      "decoded_source_name": "GB_T70_1-M3X400",
+      "quantity": 1,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-fastener-gb-t70-1-m3x400.step",
+      "image": "images/touch-r1-fastener-gb-t70-1-m3x400.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 68.9396323293472,
+        "local_bbox_mm": [
+          5.5,
+          5.5,
+          6.0
+        ]
+      },
+      "source_shape_max_tolerance_mm": 1.8317530894370092e-06,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.442943335281869e-15,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 99396,
+          "source_definition_entity": 99393,
+          "imported_label": "GB_T70_1-M3X400",
+          "placement_matrix": [
+            0.9999999999708646,
+            7.633529684458732e-06,
+            -2.2046017706720005e-09,
+            -0.1000001809426,
+            7.633529684458732e-06,
+            -0.9999999999708646,
+            -2.095962241203e-13,
+            94.11444620828,
+            -2.2046017722077275e-09,
+            1.9276733105535832e-13,
+            -1.0,
+            -82.07014647531,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "no": 16,
+      "id": "touch-r1-fastener-m3x3x60001",
+      "name_en": "Stepped socket-head fastener",
+      "name_zh": "台阶内六角紧固件",
+      "source_product_entity": 101106,
+      "source_name": "M3X3X60001",
+      "decoded_source_name": "M3X3X60001",
+      "quantity": 2,
+      "unit": "piece",
+      "step_file": "step/parts/touch-r1-fastener-m3x3x60001.step",
+      "image": "images/touch-r1-fastener-m3x3x60001.png",
+      "geometry": {
+        "solid_count": 1,
+        "valid": true,
+        "volume_mm3": 69.45176816012768,
+        "local_bbox_mm": [
+          5.0,
+          9.5,
+          5.0
+        ]
+      },
+      "source_shape_max_tolerance_mm": 1e-07,
+      "export_roundtrip_valid": true,
+      "export_volume_relative_error": 1.3299957379896202e-14,
+      "export_bbox_max_error_mm": 0.0,
+      "occurrences": [
+        {
+          "source_occurrence_entity": 101111,
+          "source_definition_entity": 101108,
+          "imported_label": "M3X3X60001",
+          "placement_matrix": [
+            1.0,
+            -0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.220446049250313e-16,
+            1.0,
+            -10.0,
+            -0.0,
+            -1.0,
+            2.220446049250313e-16,
+            50.5,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "source_occurrence_entity": 101120,
+          "source_definition_entity": 101108,
+          "imported_label": "M3X3X60002",
+          "placement_matrix": [
+            1.0,
+            2.0716456860316883e-09,
+            -2.652378132152135e-25,
+            -8.994087211818e-08,
+            7.085445544566246e-10,
+            -0.34202014332569974,
+            -0.9396926207858975,
+            29.4793098245,
+            -1.9467101640469155e-09,
+            0.9396926207858975,
+            -0.34202014332569974,
+            -40.7919398575,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "source_products": {
+    "7112": {
+      "raw_name": "_X2_51738282_X0_1_NEW",
+      "decoded_name": "关节1_NEW"
+    },
+    "11862": {
+      "raw_name": "MAIN-HORN-25T-8HOLES-3D_STEP_1_",
+      "decoded_name": "MAIN-HORN-25T-8HOLES-3D_STEP_1_"
+    },
+    "12189": {
+      "raw_name": "_________RA8-RP8-RX8-SERIES-3D_",
+      "decoded_name": "_________RA8-RP8-RX8-SERIES-3D_"
+    },
+    "17622": {
+      "raw_name": "____-_____RA8-RP8-RX8-SERIES-3D",
+      "decoded_name": "____-_____RA8-RP8-RX8-SERIES-3D"
+    },
+    "18080": {
+      "raw_name": "NONE-28056",
+      "decoded_name": "NONE-28056"
+    },
+    "18204": {
+      "raw_name": "NONE-33063",
+      "decoded_name": "NONE-33063"
+    },
+    "18326": {
+      "raw_name": "NONE-33553",
+      "decoded_name": "NONE-33553"
+    },
+    "18447": {
+      "raw_name": "NONE-68253",
+      "decoded_name": "NONE-68253"
+    },
+    "18479": {
+      "raw_name": "3PIN_____STEP_RA8-RP8-RX8-SERIE_ASM",
+      "decoded_name": "3PIN_____STEP_RA8-RP8-RX8-SERIE_ASM"
+    },
+    "21386": {
+      "raw_name": "_____________RA8-RP8-RX8-SERIES",
+      "decoded_name": "_____________RA8-RP8-RX8-SERIES"
+    },
+    "26797": {
+      "raw_name": "000",
+      "decoded_name": "000"
+    },
+    "26828": {
+      "raw_name": "RA8-RP8-RX8-SERIES-3D_2__RA8-RP_ASM",
+      "decoded_name": "RA8-RP8-RX8-SERIES-3D_2__RA8-RP_ASM"
+    },
+    "28652": {
+      "raw_name": "_________1_STEP",
+      "decoded_name": "_________1_STEP"
+    },
+    "28683": {
+      "raw_name": "RP8-U45H-M-C028_STEP_ASM",
+      "decoded_name": "RP8-U45H-M-C028_STEP_ASM"
+    },
+    "29465": {
+      "raw_name": "_X2_57AB7247_X0_",
+      "decoded_name": "垫片"
+    },
+    "35211": {
+      "raw_name": "_X2_51738282_X0_2__X2_65B0_X0_",
+      "decoded_name": "关节2_新"
+    },
+    "35916": {
+      "raw_name": "PRT0001",
+      "decoded_name": "PRT0001"
+    },
+    "36620": {
+      "raw_name": "PRT0002",
+      "decoded_name": "PRT0002"
+    },
+    "37579": {
+      "raw_name": "NONE-64810",
+      "decoded_name": "NONE-64810"
+    },
+    "42326": {
+      "raw_name": "NONE-18502",
+      "decoded_name": "NONE-18502"
+    },
+    "42448": {
+      "raw_name": "NONE-102732",
+      "decoded_name": "NONE-102732"
+    },
+    "47813": {
+      "raw_name": "NONE-23626",
+      "decoded_name": "NONE-23626"
+    },
+    "50722": {
+      "raw_name": "NONE-59096",
+      "decoded_name": "NONE-59096"
+    },
+    "51179": {
+      "raw_name": "NONE-60350",
+      "decoded_name": "NONE-60350"
+    },
+    "51301": {
+      "raw_name": "NONE-21790",
+      "decoded_name": "NONE-21790"
+    },
+    "51758": {
+      "raw_name": "NONE-99896",
+      "decoded_name": "NONE-99896"
+    },
+    "51880": {
+      "raw_name": "NONE-58286",
+      "decoded_name": "NONE-58286"
+    },
+    "52001": {
+      "raw_name": "NONE-63791",
+      "decoded_name": "NONE-63791"
+    },
+    "52123": {
+      "raw_name": "NONE-107878",
+      "decoded_name": "NONE-107878"
+    },
+    "55223": {
+      "raw_name": "NONE-62191",
+      "decoded_name": "NONE-62191"
+    },
+    "55345": {
+      "raw_name": "NONE-103767",
+      "decoded_name": "NONE-103767"
+    },
+    "55668": {
+      "raw_name": "NONE-60759",
+      "decoded_name": "NONE-60759"
+    },
+    "55700": {
+      "raw_name": "_25-50KG-0001_ASM_ASM",
+      "decoded_name": "_25-50KG-0001_ASM_ASM"
+    },
+    "66078": {
+      "raw_name": "_X2_51738282_X0_3",
+      "decoded_name": "关节3"
+    },
+    "77328": {
+      "raw_name": "_X2_51738282_X0_4",
+      "decoded_name": "关节4"
+    },
+    "86268": {
+      "raw_name": "_X2_51738282_X0_5_NEW",
+      "decoded_name": "关节5_NEW"
+    },
+    "90662": {
+      "raw_name": "_X2_51738282_X0_6_NEW",
+      "decoded_name": "关节6_NEW"
+    },
+    "98686": {
+      "raw_name": "_X2_51738282_X0_7",
+      "decoded_name": "关节7"
+    },
+    "99391": {
+      "raw_name": "GB_T70_1-M3X400",
+      "decoded_name": "GB_T70_1-M3X400"
+    },
+    "100621": {
+      "raw_name": "A000",
+      "decoded_name": "A000"
+    },
+    "101106": {
+      "raw_name": "M3X3X60001",
+      "decoded_name": "M3X3X60001"
+    },
+    "101587": {
+      "raw_name": "B000",
+      "decoded_name": "B000"
+    },
+    "101615": {
+      "raw_name": "45_X2_535551FA8235673A_X0__ASM",
+      "decoded_name": "45单出舵机_ASM"
+    }
+  },
+  "source_product_definitions": {
+    "7114": 7112,
+    "11864": 11862,
+    "12191": 12189,
+    "17624": 17622,
+    "18082": 18080,
+    "18206": 18204,
+    "18328": 18326,
+    "18449": 18447,
+    "18481": 18479,
+    "21388": 21386,
+    "26799": 26797,
+    "26830": 26828,
+    "28654": 28652,
+    "28685": 28683,
+    "29467": 29465,
+    "35213": 35211,
+    "35918": 35916,
+    "36622": 36620,
+    "37581": 37579,
+    "42328": 42326,
+    "42450": 42448,
+    "47815": 47813,
+    "50724": 50722,
+    "51181": 51179,
+    "51303": 51301,
+    "51760": 51758,
+    "51882": 51880,
+    "52003": 52001,
+    "52125": 52123,
+    "55225": 55223,
+    "55347": 55345,
+    "55670": 55668,
+    "55702": 55700,
+    "66080": 66078,
+    "77330": 77328,
+    "86270": 86268,
+    "90664": 90662,
+    "98688": 98686,
+    "99393": 99391,
+    "100623": 100621,
+    "101108": 101106,
+    "101589": 101587,
+    "101617": 101615
+  },
+  "source_assembly_edges": [
+    {
+      "entity": 7120,
+      "parent_definition": 101617,
+      "child_definition": 7114
+    },
+    {
+      "entity": 11870,
+      "parent_definition": 28685,
+      "child_definition": 11864
+    },
+    {
+      "entity": 12197,
+      "parent_definition": 26830,
+      "child_definition": 12191
+    },
+    {
+      "entity": 17627,
+      "parent_definition": 26830,
+      "child_definition": 17624
+    },
+    {
+      "entity": 18088,
+      "parent_definition": 18481,
+      "child_definition": 18082
+    },
+    {
+      "entity": 18209,
+      "parent_definition": 18481,
+      "child_definition": 18206
+    },
+    {
+      "entity": 18331,
+      "parent_definition": 18481,
+      "child_definition": 18328
+    },
+    {
+      "entity": 18452,
+      "parent_definition": 18481,
+      "child_definition": 18449
+    },
+    {
+      "entity": 18482,
+      "parent_definition": 26830,
+      "child_definition": 18481
+    },
+    {
+      "entity": 18495,
+      "parent_definition": 26830,
+      "child_definition": 18481
+    },
+    {
+      "entity": 21391,
+      "parent_definition": 26830,
+      "child_definition": 21388
+    },
+    {
+      "entity": 26802,
+      "parent_definition": 26830,
+      "child_definition": 26799
+    },
+    {
+      "entity": 26831,
+      "parent_definition": 28685,
+      "child_definition": 26830
+    },
+    {
+      "entity": 28657,
+      "parent_definition": 28685,
+      "child_definition": 28654
+    },
+    {
+      "entity": 28686,
+      "parent_definition": 101617,
+      "child_definition": 28685
+    },
+    {
+      "entity": 29470,
+      "parent_definition": 101617,
+      "child_definition": 29467
+    },
+    {
+      "entity": 35216,
+      "parent_definition": 101617,
+      "child_definition": 35213
+    },
+    {
+      "entity": 35921,
+      "parent_definition": 101617,
+      "child_definition": 35918
+    },
+    {
+      "entity": 36625,
+      "parent_definition": 101617,
+      "child_definition": 36622
+    },
+    {
+      "entity": 37587,
+      "parent_definition": 55702,
+      "child_definition": 37581
+    },
+    {
+      "entity": 42331,
+      "parent_definition": 55702,
+      "child_definition": 42328
+    },
+    {
+      "entity": 42453,
+      "parent_definition": 55702,
+      "child_definition": 42450
+    },
+    {
+      "entity": 47818,
+      "parent_definition": 55702,
+      "child_definition": 47815
+    },
+    {
+      "entity": 50727,
+      "parent_definition": 55702,
+      "child_definition": 50724
+    },
+    {
+      "entity": 51184,
+      "parent_definition": 55702,
+      "child_definition": 51181
+    },
+    {
+      "entity": 51306,
+      "parent_definition": 55702,
+      "child_definition": 51303
+    },
+    {
+      "entity": 51763,
+      "parent_definition": 55702,
+      "child_definition": 51760
+    },
+    {
+      "entity": 51885,
+      "parent_definition": 55702,
+      "child_definition": 51882
+    },
+    {
+      "entity": 52006,
+      "parent_definition": 55702,
+      "child_definition": 52003
+    },
+    {
+      "entity": 52128,
+      "parent_definition": 55702,
+      "child_definition": 52125
+    },
+    {
+      "entity": 55228,
+      "parent_definition": 55702,
+      "child_definition": 55225
+    },
+    {
+      "entity": 55350,
+      "parent_definition": 55702,
+      "child_definition": 55347
+    },
+    {
+      "entity": 55673,
+      "parent_definition": 55702,
+      "child_definition": 55670
+    },
+    {
+      "entity": 55703,
+      "parent_definition": 101617,
+      "child_definition": 55702
+    },
+    {
+      "entity": 66083,
+      "parent_definition": 101617,
+      "child_definition": 66080
+    },
+    {
+      "entity": 66092,
+      "parent_definition": 101617,
+      "child_definition": 55702
+    },
+    {
+      "entity": 77333,
+      "parent_definition": 101617,
+      "child_definition": 77330
+    },
+    {
+      "entity": 77342,
+      "parent_definition": 101617,
+      "child_definition": 55702
+    },
+    {
+      "entity": 86273,
+      "parent_definition": 101617,
+      "child_definition": 86270
+    },
+    {
+      "entity": 86282,
+      "parent_definition": 101617,
+      "child_definition": 28685
+    },
+    {
+      "entity": 90667,
+      "parent_definition": 101617,
+      "child_definition": 90664
+    },
+    {
+      "entity": 90676,
+      "parent_definition": 101617,
+      "child_definition": 28685
+    },
+    {
+      "entity": 98691,
+      "parent_definition": 101617,
+      "child_definition": 98688
+    },
+    {
+      "entity": 99396,
+      "parent_definition": 101617,
+      "child_definition": 99393
+    },
+    {
+      "entity": 100626,
+      "parent_definition": 101617,
+      "child_definition": 100623
+    },
+    {
+      "entity": 101111,
+      "parent_definition": 101617,
+      "child_definition": 101108
+    },
+    {
+      "entity": 101120,
+      "parent_definition": 101617,
+      "child_definition": 101108
+    },
+    {
+      "entity": 101592,
+      "parent_definition": 101617,
+      "child_definition": 101589
+    }
+  ],
+  "tool": {
+    "freecad": "1.1.4"
+  }
+}

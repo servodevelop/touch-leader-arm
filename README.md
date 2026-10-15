@@ -1,16 +1,16 @@
-# Touch Leader Arm
+# Touch R1 Leader Arm
 
 <sub>**English** / [简体中文](README.zh.md)</sub>
 
-Hardware resources for Touch Leader Arm and Python teleoperation resources for Star Arm 102 → Lumos.
+Hardware resources for Touch R1 Leader Arm and Python teleoperation resources for Star Arm 102 → Lumos.
 
 ## Resources
 
 | Task | Entry | Status |
 | --- | --- | --- |
-| Find hardware specifications and CAD resources | [Hardware](hardware/) | V3.1 assembly STEP available; other resources pending |
+| Find hardware specifications and CAD resources | [Hardware](hardware/) | V3.1 assembly, 16 STEP exports, and illustrated CAD BOM available; purchase specifications pending confirmation |
 | Read assembly, calibration, and operation guides | [Documentation](docs/) | Teleoperation guide available in Chinese; other guides pending |
-| Install dependencies and run teleoperation | [Python SDK](python-sdk/) | Existing Star Arm 102 → Lumos script and guide; Touch Leader Arm V3.1 compatibility unverified |
+| Install dependencies and run teleoperation | [Python SDK](python-sdk/) | Existing Star Arm 102 → Lumos script and guide; Touch R1 Leader Arm V3.1 compatibility unverified |
 
 ## Repository layout
 
