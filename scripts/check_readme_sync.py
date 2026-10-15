@@ -1,91 +1,54 @@
-"""Check structure of current bilingual READMEs; translation meaning needs review."""
-from collections import Counter
-from html.parser import HTMLParser
+"""检查中文 README 入口与旧中文链接兼容页，保留原检查命令名。"""
+import argparse
 from pathlib import Path
 import re
-from urllib.parse import unquote
-from markdown_it import MarkdownIt
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-PARSER = MarkdownIt('commonmark')
 
-class HTMLAssets(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.images = []
-        self.links = []
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        if tag == 'img' and attrs.get('src'):
-            self.images.append(attrs['src'])
-        if tag == 'a' and attrs.get('href'):
-            self.links.append(attrs['href'])
 
-def canonical(target, source=None):
-    # Language-specific targets may differ while referring to the same guide.
-    target = unquote(target).split('#')[0]
-    # Directory browsing and README reading are distinct destinations.
-    target = target.replace('README.zh-CN.md', 'README.md').replace('README.zh.md', 'README.md')
-    return target.replace('handoff-review.zh.md', 'handoff-review.md').replace('getting-started.zh.md', 'getting-started.md')
+def compatibility_page(text):
+    title = text.splitlines()[0]
+    lines = [title, '', '文档已统一使用中文，正文请查看 [当前文档](README.md)。', '']
+    for anchor, heading in re.findall(r'<a id="([^"]+)"></a>\s*\n\s*## ([^\n]+)', text):
+        lines.extend([f'<a id="{anchor}"></a>', '', f'[查看：{heading}](README.md#{anchor})', ''])
+    return '\n'.join(lines)
 
-def signature(path):
-    text = path.read_text()
-    tokens = PARSER.parse(text)
-    headings, code, images, links = [], [], [], []
-    def visit(items):
-        for token in items:
-            if token.type == 'heading_open':
-                headings.append(token.tag)
-            elif token.type in ('fence', 'code_block'):
-                content = token.content
-                # Directory-tree annotations are prose and may be translated.
-                if token.type == 'fence' and token.info.strip() == 'text':
-                    content = re.sub(r'(?m)^([ │]*[├└]─+[ ]+\S+)[ ]{2,}[^\n]+$', r'\1', content)
-                code.append(content)
-            elif token.type == 'image':
-                images.append(token.attrGet('src'))
-            elif token.type == 'link_open':
-                links.append(token.attrGet('href'))
-            elif token.type in ('html_inline', 'html_block'):
-                html = HTMLAssets()
-                html.feed(token.content)
-                images.extend(html.images)
-                links.extend(html.links)
-            if token.children:
-                visit(token.children)
-    visit(tokens)
-    tables = []
-    rows = []
-    for line in text.splitlines() + ['']:
-        if line.startswith('|'):
-            rows.append(len(re.split(r'(?<!\\)\|', line)))
-        elif rows:
-            tables.append(rows)
-            rows = []
-    return {'headings': headings, 'code': code, 'images': Counter(images),
-            'tables': tables, 'links': {canonical(x, path) for x in links if canonical(x, path)}}
 
 def main():
-    pairs = sorted(set(ROOT.rglob('README.zh.md')) | set(ROOT.rglob('README.zh-CN.md')))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--write-redirects', action='store_true', help='更新已有 README.zh.md 兼容页')
+    args = parser.parse_args()
+    pages = [p for p in sorted(ROOT.rglob('README.md'))
+             if not any(part.startswith('.') for part in p.relative_to(ROOT).parts)]
     errors = []
-    for zh in pairs:
-        if any(p.startswith('.') for p in zh.relative_to(ROOT).parts):
-            continue
-        en = zh.with_name('README.md')
-        if not en.exists():
-            errors.append(f'{zh.relative_to(ROOT)}: missing English README')
-            continue
-        a, b = signature(en), signature(zh)
-        for field in a:
-            if a[field] != b[field]:
-                detail = ''
-                if field == 'links':
-                    detail = f'; EN only: {a[field] - b[field]}; ZH only: {b[field] - a[field]}'
-                errors.append(f'{zh.relative_to(ROOT)}: mismatched {field}{detail}')
-    print('\n'.join(errors)) if errors else None
-    print(f'Checked {len(pairs)} bilingual README pairs; {len(errors)} structural errors.')
-    print('Manual review is required for translation meaning and synchronized factual changes.')
+    for path in pages:
+        text = path.read_text()
+        relative = path.relative_to(ROOT)
+        if not re.search(r'[\u4e00-\u9fff]', text) or '<sub>**简体中文**</sub>' not in text:
+            errors.append(f'{relative}: 缺少中文内容或中文标识')
+        links = re.findall(r'\]\(([^)]+)\)', text)
+        old_local_links = any(not urlsplit(link).scheme and not urlsplit(link).netloc
+                              and 'README.zh.md' in urlsplit(link).path for link in links)
+        if re.search(r'\[English\]|\*\*English\*\*', text) or old_local_links:
+            errors.append(f'{relative}: 存在旧语言切换或非规范正文链接')
+        if path.parent != ROOT and not re.search(r'^\[← [^\]]+\]\(\.\./README\.md\)', text, re.M):
+            errors.append(f'{relative}: 缺少直接上级导航')
+        zh = path.with_name('README.zh.md')
+        if zh.exists():
+            expected = compatibility_page(text)
+            if args.write_redirects:
+                zh.write_text(expected)
+            elif zh.read_text() != expected:
+                errors.append(f'{zh.relative_to(ROOT)}: 兼容页需更新（--write-redirects）')
+    for zh in ROOT.rglob('README.zh.md'):
+        if not zh.with_name('README.md').exists():
+            errors.append(f'{zh.relative_to(ROOT)}: 缺少中文正文入口')
+    for error in errors:
+        print(error)
+    print(f'已检查 {len(pages)} 个中文 README 入口；{len(errors)} 个错误。')
     return bool(errors)
+
 
 if __name__ == '__main__':
     raise SystemExit(main())

@@ -1,10 +1,10 @@
-# Repository Maintenance Scripts
+# 仓库维护脚本
 
-[← Home](../README.md)　|　<sub>**English** / [简体中文](README.zh.md)</sub>
+[← 首页](../README.md)　|　<sub>**简体中文**</sub>
 
-## Documentation checks
+## 文档检查
 
-Run from the repository root with Python 3.10 or newer:
+使用 Python 3.10 或更新版本，在仓库根目录执行：
 
 ```bash
 python -m pip install -r scripts/requirements-docs.txt
@@ -12,13 +12,13 @@ python scripts/check_docs.py
 python scripts/check_readme_sync.py
 ```
 
-The checks cover local file/image links and bilingual README structure. Translation meaning needs manual review.
+检查覆盖本地文件／图片链接、中文 README 入口与旧链接兼容页。正文只维护 `README.md`，不要求同步英文。
 
-## Reproduce the CAD BOM and illustrations
+## 重新生成 CAD BOM 与简图
 
-The [hardware BOM](../hardware/touch-leader-arm/README.md#bill-of-materials) is derived from the checksum-pinned V3.1 assembly. `extract_step_bom.py` requires a Python environment with FreeCAD, Part, and Import. `render_bom.py` runs inside Blender. The generated assets were checked with FreeCAD 1.1.4 and Blender 5.2.2.
+[硬件 BOM](../hardware/touch-leader-arm/README.md#bill-of-materials) 根据以校验值锁定的 V3.1 装配体提取。`extract_step_bom.py` 需要可导入 FreeCAD、Part、Import 的 Python 环境；`render_bom.py` 在 Blender 内运行。生成资源已使用 FreeCAD 1.1.4 和 Blender 5.2.2 检查。
 
-On macOS, with FreeCAD and Blender installed in `/Applications`, run from the repository root:
+在 macOS 上，FreeCAD 与 Blender 安装于 `/Applications` 时，在仓库根目录执行：
 
 ```bash
 PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
@@ -30,8 +30,16 @@ PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
   --mesh-dir /tmp/touch-r1-bom-meshes
 ```
 
-The first command regenerates the 16 `step/parts/` exports and `bom.json`; the second regenerates 17 images (16 BOM items and the assembly). Temporary triangle meshes stay outside the repository. The assembly file is never rewritten. Repeated source PRODUCT references are counted as instances; servo internals stay inside their subassembly. Equal-looking components with different source PRODUCT identifiers are not automatically merged.
+第一条命令重新生成 16 份 `step/parts/` 导出件及 `bom.json`；第二条生成 17 张图片（16 项 BOM 及装配体）。临时三角网格保存在仓库外，不改写装配体源文件。重复的源 PRODUCT 引用按实例计数；舵机内部零件保留在子装配内。外形相似但源 PRODUCT 标识不同的组件不会自动合并。
 
-Exports are reimported to verify shape validity and solid counts, with bounding-box differences below 0.001 mm and volume differences within the larger of 0.001 mm³ or 0.01%. The source CAD tolerances and measured errors are retained in `bom.json`. These numerical checks are not manufacturing tolerances. Source component placements are removed for individual exports; internal subassembly placements remain intact.
+导出件会重新导入，检查形体有效性、实体数，以及包围尺寸差小于 0.001 mm、体积差不超过 0.001 mm³ 与 0.01% 中的较大值。源 CAD 公差和实测误差保留在 `bom.json`。这些数值检查阈值不是制造公差。独立导出时移除组件在总装中的位置变换，保留子装配内部的位置变换。
 
-If the assembly changes, review the source identifiers and BOM scope before updating the pinned SHA-256 and item mapping. The STEP reference parser is specific to this Creo export. The scripts do not rewrite the README tables: synchronize the English and Chinese tables with the regenerated data, then inspect every image and run the documentation checks.
+装配体变更后，先复核源编号与 BOM 范围，再更新锁定的 SHA-256 和项目映射。STEP 引用解析器仅针对这份 Creo 导出文件。脚本不改写 README 表格：重新生成数据后需更新中文表格，逐张检查图片并运行文档检查。
+
+## 螺钉规格维护
+
+`fastener_specs.py` 按圆柱面半径与轴向边界核查 4 种紧固件，区分头下长度、头高、台阶段与末段；提取程序将结果写入 `bom.json` 的 `fastener_specification`。源尺寸变化时检查会中止，需复核后更新规格。
+
+`bom.json` 第 2 版保留英文机器字段名，展示名称使用 `name_zh`，不再生成 `name_en`。规格中的 M3 × 4 是 CAD 推定，不能作为已确认的采购螺纹。材质、强度等级和表面处理须另有依据。
+
+中文正文更新后，运行 `python scripts/check_readme_sync.py --write-redirects` 更新旧 `README.zh.md` 兼容页，再运行文档检查。兼容页保留已发布的显式章节锚点，正文只维护一份。

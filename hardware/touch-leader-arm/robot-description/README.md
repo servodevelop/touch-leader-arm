@@ -1,17 +1,17 @@
-# Touch Leader Arm Robot Description
+# Touch R1 Leader Arm 机器人描述
 
-[← Touch Leader Arm Hardware](../README.md)　|　<sub>**English** / [简体中文](README.zh.md)</sub>
+[← Touch R1 Leader Arm 硬件](../README.md)　|　<sub>**简体中文**</sub>
 
-The V3.1 robot description is pending. This directory will contain the URDF package, its mesh assets, and visualization instructions once available.
+V3.1 机器人描述待补充。资料就绪后，此目录将提供 URDF 软件包、配套网格资源及可视化说明。
 
-## Model framework
+## 模型框架
 
-| Item | Status |
+| 项目 | 状态 |
 | --- | --- |
-| Link and joint definitions | Pending |
-| Visual and collision meshes | Pending |
-| Joint limits, masses, and inertia | Pending confirmation |
-| ROS version and package layout | Pending confirmation |
-| Visualization and simulation commands | Pending validation |
+| 连杆与关节定义 | 待补充 |
+| 可视化与碰撞网格 | 待补充 |
+| 关节限位、质量与惯量 | 待确认 |
+| ROS 版本与软件包结构 | 待确认 |
+| 可视化与仿真命令 | 待验证 |
 
-Keep runtime mesh assets inside the robot description package when adding it. The [assembly STEP](../step/assembly/touch-leader-arm-v3.1-1013.stp) is available as a CAD reference; no URDF or runnable ROS package is supplied yet.
+添加机器人描述软件包时，将运行所需网格保留在包内。已有 [装配体 STEP](../step/assembly/touch-leader-arm-v3.1-1013.stp) 可供 CAD 参考；目前尚未提供 URDF 或可运行的 ROS 软件包。

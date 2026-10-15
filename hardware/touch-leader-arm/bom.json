@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "model": "Touch R1 Leader Arm",
   "revision": "V3.1",
   "source_file": "step/assembly/touch-leader-arm-v3.1-1013.stp",
@@ -25,13 +25,12 @@
     "absolute_volume_mm3": 0.001,
     "bbox_mm": 0.001
   },
-  "quantity_basis": "Direct children of the assembly root; repeated PRODUCT references grouped. Servo internals excluded from additional BOM rows.",
-  "procurement_status": "CAD-derived; specifications, omitted components and completeness require engineering confirmation.",
+  "quantity_basis": "按根装配直接子项统计，合并重复 PRODUCT 引用；舵机内部零件不重复列为 BOM 行。",
+  "procurement_status": "由 CAD 提取；采购规格、未建模组件与清单完整性待工程确认。",
   "items": [
     {
       "no": 1,
       "id": "touch-r1-servo-rp8-u45h-m-c028",
-      "name_en": "Servo subassembly",
       "name_zh": "舵机子装配",
       "source_product_entity": 28683,
       "source_name": "RP8-U45H-M-C028_STEP_ASM",
@@ -129,7 +128,6 @@
     {
       "no": 2,
       "id": "touch-r1-servo-25-50kg-0001",
-      "name_en": "Servo subassembly (model unconfirmed)",
       "name_zh": "舵机子装配（型号待确认）",
       "source_product_entity": 55700,
       "source_name": "_25-50KG-0001_ASM_ASM",
@@ -227,7 +225,6 @@
     {
       "no": 3,
       "id": "touch-r1-joint-1",
-      "name_en": "Joint 1 structure",
       "name_zh": "关节 1 结构件",
       "source_product_entity": 7112,
       "source_name": "_X2_51738282_X0_1_NEW",
@@ -279,7 +276,6 @@
     {
       "no": 4,
       "id": "touch-r1-joint-2",
-      "name_en": "Joint 2 structure",
       "name_zh": "关节 2 结构件",
       "source_product_entity": 35211,
       "source_name": "_X2_51738282_X0_2__X2_65B0_X0_",
@@ -331,7 +327,6 @@
     {
       "no": 5,
       "id": "touch-r1-joint-3",
-      "name_en": "Joint 3 structure",
       "name_zh": "关节 3 结构件",
       "source_product_entity": 66078,
       "source_name": "_X2_51738282_X0_3",
@@ -383,7 +378,6 @@
     {
       "no": 6,
       "id": "touch-r1-joint-4",
-      "name_en": "Joint 4 structure",
       "name_zh": "关节 4 结构件",
       "source_product_entity": 77328,
       "source_name": "_X2_51738282_X0_4",
@@ -435,7 +429,6 @@
     {
       "no": 7,
       "id": "touch-r1-joint-5",
-      "name_en": "Joint 5 structure",
       "name_zh": "关节 5 结构件",
       "source_product_entity": 86268,
       "source_name": "_X2_51738282_X0_5_NEW",
@@ -487,7 +480,6 @@
     {
       "no": 8,
       "id": "touch-r1-joint-6",
-      "name_en": "Joint 6 structure",
       "name_zh": "关节 6 结构件",
       "source_product_entity": 90662,
       "source_name": "_X2_51738282_X0_6_NEW",
@@ -539,7 +531,6 @@
     {
       "no": 9,
       "id": "touch-r1-joint-7",
-      "name_en": "Joint 7 handle structure",
       "name_zh": "关节 7 手柄结构件",
       "source_product_entity": 98686,
       "source_name": "_X2_51738282_X0_7",
@@ -591,7 +582,6 @@
     {
       "no": 10,
       "id": "touch-r1-spacer",
-      "name_en": "Spacer",
       "name_zh": "垫片",
       "source_product_entity": 29465,
       "source_name": "_X2_57AB7247_X0_",
@@ -643,7 +633,6 @@
     {
       "no": 11,
       "id": "touch-r1-part-a000",
-      "name_en": "Bracket A000 (function unconfirmed)",
       "name_zh": "支架 A000（用途待确认）",
       "source_product_entity": 100621,
       "source_name": "A000",
@@ -695,7 +684,6 @@
     {
       "no": 12,
       "id": "touch-r1-part-b000",
-      "name_en": "Bracket B000 (function unconfirmed)",
       "name_zh": "支架 B000（用途待确认）",
       "source_product_entity": 101587,
       "source_name": "B000",
@@ -747,8 +735,7 @@
     {
       "no": 13,
       "id": "touch-r1-fastener-prt0001",
-      "name_en": "Socket-head fastener PRT0001",
-      "name_zh": "内六角紧固件 PRT0001",
+      "name_zh": "内六角圆柱头螺钉",
       "source_product_entity": 35916,
       "source_name": "PRT0001",
       "decoded_source_name": "PRT0001",
@@ -794,13 +781,27 @@
             1.0
           ]
         }
-      ]
+      ],
+      "fastener_specification": {
+        "name_zh": "内六角圆柱头螺钉",
+        "specification_zh": "M3 × 4（CAD 推定，螺纹待确认）",
+        "dimensions_mm": {
+          "head_diameter_mm": 5.5,
+          "head_height_mm": 2.0,
+          "shank_diameter_mm": 3.0,
+          "under_head_length_mm": 4.0
+        },
+        "measurement_basis_zh": "按圆柱面半径及轴向边界测量；含头总长不作为螺钉标称长度。",
+        "assessment_zh": "按杆径 3 mm、头下长度 4 mm 推定；CAD 头高仅 2 mm，不据源名称确认 GB/T 70.1 标准符合性。",
+        "confirmation_status_zh": "CAD 尺寸已核查；螺纹、螺距、标准、材质、强度等级及表面处理待工程确认。",
+        "format_reference": "https://github.com/servodevelop/Star-Arm-102/blob/main/hardware/102-hd/README.zh.md#bill-of-materials",
+        "reference_scope_zh": "仅参考 102 的品名与规格表达方式，不继承其尺寸、数量和采购属性。"
+      }
     },
     {
       "no": 14,
       "id": "touch-r1-fastener-prt0002",
-      "name_en": "Socket-head fastener PRT0002",
-      "name_zh": "内六角紧固件 PRT0002",
+      "name_zh": "内六角圆柱头螺钉",
       "source_product_entity": 36620,
       "source_name": "PRT0002",
       "decoded_source_name": "PRT0002",
@@ -846,13 +847,27 @@
             1.0
           ]
         }
-      ]
+      ],
+      "fastener_specification": {
+        "name_zh": "内六角圆柱头螺钉",
+        "specification_zh": "M3 × 4（CAD 推定，螺纹待确认）",
+        "dimensions_mm": {
+          "head_diameter_mm": 5.5,
+          "head_height_mm": 2.0,
+          "shank_diameter_mm": 3.0,
+          "under_head_length_mm": 4.0
+        },
+        "measurement_basis_zh": "按圆柱面半径及轴向边界测量；含头总长不作为螺钉标称长度。",
+        "assessment_zh": "按杆径 3 mm、头下长度 4 mm 推定；CAD 头高仅 2 mm，不据源名称确认 GB/T 70.1 标准符合性。",
+        "confirmation_status_zh": "CAD 尺寸已核查；螺纹、螺距、标准、材质、强度等级及表面处理待工程确认。",
+        "format_reference": "https://github.com/servodevelop/Star-Arm-102/blob/main/hardware/102-hd/README.zh.md#bill-of-materials",
+        "reference_scope_zh": "仅参考 102 的品名与规格表达方式，不继承其尺寸、数量和采购属性。"
+      }
     },
     {
       "no": 15,
       "id": "touch-r1-fastener-gb-t70-1-m3x400",
-      "name_en": "Socket-head fastener GB_T70_1-M3X400",
-      "name_zh": "内六角紧固件 GB_T70_1-M3X400",
+      "name_zh": "内六角圆柱头螺钉",
       "source_product_entity": 99391,
       "source_name": "GB_T70_1-M3X400",
       "decoded_source_name": "GB_T70_1-M3X400",
@@ -898,13 +913,27 @@
             1.0
           ]
         }
-      ]
+      ],
+      "fastener_specification": {
+        "name_zh": "内六角圆柱头螺钉",
+        "specification_zh": "M3 × 4（CAD 推定，螺纹待确认）",
+        "dimensions_mm": {
+          "head_diameter_mm": 5.5,
+          "head_height_mm": 2.0,
+          "shank_diameter_mm": 3.0,
+          "under_head_length_mm": 4.0
+        },
+        "measurement_basis_zh": "按圆柱面半径及轴向边界测量；含头总长不作为螺钉标称长度。",
+        "assessment_zh": "按杆径 3 mm、头下长度 4 mm 推定；CAD 头高仅 2 mm，不据源名称确认 GB/T 70.1 标准符合性。",
+        "confirmation_status_zh": "CAD 尺寸已核查；螺纹、螺距、标准、材质、强度等级及表面处理待工程确认。",
+        "format_reference": "https://github.com/servodevelop/Star-Arm-102/blob/main/hardware/102-hd/README.zh.md#bill-of-materials",
+        "reference_scope_zh": "仅参考 102 的品名与规格表达方式，不继承其尺寸、数量和采购属性。"
+      }
     },
     {
       "no": 16,
       "id": "touch-r1-fastener-m3x3x60001",
-      "name_en": "Stepped socket-head fastener",
-      "name_zh": "台阶内六角紧固件",
+      "name_zh": "内六角台阶螺钉",
       "source_product_entity": 101106,
       "source_name": "M3X3X60001",
       "decoded_source_name": "M3X3X60001",
@@ -973,7 +1002,25 @@
             1.0
           ]
         }
-      ]
+      ],
+      "fastener_specification": {
+        "name_zh": "内六角台阶螺钉",
+        "specification_zh": "台阶段 Ø2.5 × 3 mm；末段 Ø2 × 4 mm（螺纹待确认）",
+        "dimensions_mm": {
+          "head_diameter_mm": 5.0,
+          "head_height_mm": 2.5,
+          "shoulder_diameter_mm": 2.5,
+          "shoulder_length_mm": 3.0,
+          "tip_diameter_mm": 2.0,
+          "tip_length_mm": 4.0,
+          "under_head_length_mm": 7.0
+        },
+        "measurement_basis_zh": "按圆柱面半径及轴向边界测量；含头总长不作为螺钉标称长度。",
+        "assessment_zh": "源名称含 M3，但台阶段直径为 2.5 mm、末段为 2 mm；不能据名称确定 M3，也不能将末段直径直接认定为 M2 螺纹。",
+        "confirmation_status_zh": "CAD 尺寸已核查；螺纹、螺距、标准、材质、强度等级及表面处理待工程确认。",
+        "format_reference": "https://github.com/servodevelop/Star-Arm-102/blob/main/hardware/102-hd/README.zh.md#bill-of-materials",
+        "reference_scope_zh": "仅参考 102 的品名与规格表达方式，不继承其尺寸、数量和采购属性。"
+      }
     }
   ],
   "source_products": {

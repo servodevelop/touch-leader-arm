@@ -1,21 +1,21 @@
-# Touch R1 Leader Arm Hardware Resources
+# Touch R1 Leader Arm 硬件资源
 
-[← Home](../README.md)　|　<sub>**English** / [简体中文](README.zh.md)</sub>
+[← 首页](../README.md)　|　<sub>**简体中文**</sub>
 
-Find the [Touch R1 Leader Arm hardware resources](touch-leader-arm/) for the supplied V3.1 assembly. Resource categories follow the Star Arm 102 hardware layout.
+在 [Touch R1 Leader Arm 硬件目录](touch-leader-arm/) 查看已提供的 V3.1 装配体及相关资源。资源分类参考 Star Arm 102 的 hardware 结构。
 
-## Specifications
+## 产品规格
 
-| Specification | Touch R1 Leader Arm |
+| 规格 | Touch R1 Leader Arm |
 | --- | --- |
-| Hardware revision | V3.1, as labeled in the supplied assembly filename |
-| Arm type | Teleoperation leader arm |
-| Degrees of freedom | Pending confirmation |
-| Reach and weight | Pending confirmation |
-| Power and communication | Pending confirmation |
-| Actuators and encoders | Pending confirmation |
-| Joint motion ranges | Pending confirmation |
+| 硬件版本 | V3.1，依据所提供装配体的文件名标注 |
+| 产品类型 | 遥操作主臂 |
+| 自由度 | 待确认 |
+| 臂展与重量 | 待确认 |
+| 电源与通信 | 待确认 |
+| 执行器与编码器 | 待确认 |
+| 关节运动范围 | 待确认 |
 
-## Available resources
+## 资料状态
 
-The V3.1 assembly, 16 individual STEP exports, and an illustrated CAD BOM covering 21 top-level occurrences are available. Purchase specifications and BOM completeness require confirmation. Printing files, drawings, assembly instructions, and robot description are pending. See the [model page](touch-leader-arm/README.md) for download links and validation status.
+已提供 V3.1 装配体、16 份独立 STEP 导出件，以及覆盖 21 个顶层实例的图文 CAD BOM。采购规格与物料清单完整性待确认。打印文件、工程图纸、装配说明及机器人描述待补充。下载链接与验证状态见 [型号页面](touch-leader-arm/README.md)。

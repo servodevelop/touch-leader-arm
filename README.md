@@ -1,23 +1,24 @@
 # Touch R1 Leader Arm
 
-<sub>**English** / [简体中文](README.zh.md)</sub>
+<sub>**简体中文**</sub>
 
-Hardware resources for Touch R1 Leader Arm and Python teleoperation resources for Star Arm 102 → Lumos.
+Touch R1 Leader Arm 硬件资源，以及 Star Arm 102 → Lumos 的 Python 遥操作资源。
 
-## Resources
+文档以中文为主，英文按需补充。各目录的 `README.md` 为正文入口。
 
-| Task | Entry | Status |
+## 资源入口
+
+| 任务 | 入口 | 状态 |
 | --- | --- | --- |
-| Find hardware specifications and CAD resources | [Hardware](hardware/) | V3.1 assembly, 16 STEP exports, and illustrated CAD BOM available; purchase specifications pending confirmation |
-| Read assembly, calibration, and operation guides | [Documentation](docs/) | Teleoperation guide available in Chinese; other guides pending |
-| Install dependencies and run teleoperation | [Python SDK](python-sdk/) | Existing Star Arm 102 → Lumos script and guide; Touch R1 Leader Arm V3.1 compatibility unverified |
+| 查看硬件规格与 CAD 资料 | [硬件资源](hardware/) | 已提供 V3.1 装配体、16 份 STEP 导出件及图文 CAD BOM；采购规格待确认 |
+| 查阅装配、校准与使用指南 | [文档中心](docs/) | 已有中文遥操作指南；其他指南待补 |
+| 安装依赖并运行遥操作 | [Python SDK](python-sdk/) | 已有 Star Arm 102 → Lumos 脚本与指南；Touch R1 Leader Arm V3.1 兼容性尚未验证 |
 
-## Repository layout
+## 仓库结构
 
 ```text
 .
 ├── README.md
-├── README.zh.md
 ├── hardware/
 │   └── touch-leader-arm/
 │       ├── step/
@@ -30,7 +31,6 @@ Hardware resources for Touch R1 Leader Arm and Python teleoperation resources fo
 │       └── robot-description/
 ├── docs/
 │   ├── README.md
-│   ├── README.zh.md
 │   └── StarArm102_Lumos_Python_Teleoperation_Guide.docx
 ├── python-sdk/
 │   ├── stararm102_lumos_teleop.py
@@ -38,9 +38,9 @@ Hardware resources for Touch R1 Leader Arm and Python teleoperation resources fo
 └── scripts/
 ```
 
-## Documentation checks
+## 文档检查
 
-From the repository root:
+在仓库根目录执行：
 
 ```bash
 python -m pip install -r scripts/requirements-docs.txt
@@ -48,4 +48,4 @@ python scripts/check_docs.py
 python scripts/check_readme_sync.py
 ```
 
-These checks cover local file links and bilingual README structure. Translation meaning, CAD geometry, and operation on hardware require separate validation.
+这些检查覆盖本地文件链接、中文 README 入口与旧链接兼容页。CAD 几何和硬件实际运行需要另外验证。

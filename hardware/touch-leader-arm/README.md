@@ -1,104 +1,108 @@
-# Touch R1 Leader Arm Hardware
+# Touch R1 Leader Arm 硬件
 
-[← Hardware Resources](../README.md)　|　<sub>**English** / [简体中文](README.zh.md)</sub>
+[← 硬件资源](../README.md)　|　<sub>**简体中文**</sub>
 
-CAD resources and an assembly-derived bill of materials for the supplied V3.1 model.
+所提供 V3.1 模型的 CAD 资源及按装配体提取的物料清单。
 
-**Contents:**
+**目录：**
 
-- [📂 Resources](#resources)
-- [📐 Assembly model](#assembly-model)
-- [📋 Bill of materials](#bill-of-materials)
-- [🔎 Items requiring confirmation](#confirmation)
-- [🛠️ Assembly and calibration](#assembly-and-calibration)
-- [✅ Validation status](#validation-status)
+- [📂 资源目录](#resources)
+- [📐 装配模型](#assembly-model)
+- [📋 物料清单](#bill-of-materials)
+- [🔎 待确认事项](#confirmation)
+- [🛠️ 装配与校准](#assembly-and-calibration)
+- [✅ 验证状态](#validation-status)
 
 <a id="resources"></a>
 
-## Resources
+## 资源目录
 
-| Directory / file | Contents | Status |
+| 目录／文件 | 内容 | 状态 |
 | --- | --- | --- |
-| [step/assembly/](step/assembly/) | Original V3.1 assembly STEP | Source bytes preserved; CAD import checked |
-| [step/parts/](step/parts/) | 16 individual part or subassembly STEP exports | Export and reimport checks passed |
-| [bom.json](bom.json) | BOM quantities, source identifiers, instance placements, and geometry checks | Extracted from the source assembly tree |
-| [printing/stl/](printing/stl/) | Printable part meshes | Pending |
-| [printing/3mf/](printing/3mf/) | Individual and complete print projects | Pending |
-| [drawings/](drawings/) | Dimensioned drawings, PDF / DWG | Pending |
-| [robot-description/](robot-description/) | URDF, meshes, and visualization instructions | Framework only; model pending |
+| [step/assembly/](step/assembly/) | 原始 V3.1 装配体 STEP | 源文件字节保持不变；已检查 CAD 导入 |
+| [step/parts/](step/parts/) | 16 份独立零件或子装配 STEP | 已通过导出与重新导入检查 |
+| [bom.json](bom.json) | BOM 数量、源编号、实例位置及几何检查结果 | 根据源装配树提取 |
+| [printing/stl/](printing/stl/) | 可打印的零件网格 | 待补充 |
+| [printing/3mf/](printing/3mf/) | 独立零件与整套打印项目 | 待补充 |
+| [drawings/](drawings/) | 带尺寸工程图纸，PDF／DWG | 待补充 |
+| [robot-description/](robot-description/) | URDF、网格和可视化说明 | 仅有框架；模型待补充 |
 
 <a id="assembly-model"></a>
 
-## Assembly model
+## 装配模型
 
-[Download V3.1 assembly STEP](step/assembly/touch-leader-arm-v3.1-1013.stp).
+[下载 V3.1 装配体 STEP](step/assembly/touch-leader-arm-v3.1-1013.stp)。
 
-<a href="images/touch-r1-assembly.png"><img src="images/touch-r1-assembly.png" alt="Touch R1 V3.1 CAD assembly" width="320"></a>
+<a href="images/touch-r1-assembly.png"><img src="images/touch-r1-assembly.png" alt="Touch R1 V3.1 CAD 装配体" width="320"></a>
 
-The supplied file `遥操臂V3.1_1013.stp` is stored as `touch-leader-arm-v3.1-1013.stp` without changing its contents. Its STEP header identifies Creo Parametric as the exporter and records `2026-10-13T11:21:50` as the export timestamp. The revision label comes from the source filename.
+所提供的文件 `遥操臂V3.1_1013.stp` 以 `touch-leader-arm-v3.1-1013.stp` 保存，内容未作修改。STEP 文件头记录的导出软件为 Creo Parametric，导出时间为 `2026-10-13T11:21:50`。版本标注来自源文件名。
 
-The individual STEP files preserve each component's local CAD coordinates; servo exports retain their internal geometry as a complete subassembly. They are reference CAD exports, with no manufacturing or printing process assigned.
+独立 STEP 保留各组件自身的 CAD 坐标系；舵机导出件保留内部几何，作为完整子装配提供。这些文件为参考 CAD 导出件，尚未指定制造或打印工艺。
 
 <a id="bill-of-materials"></a>
 
-## Bill of materials
+## 物料清单
 
-The table lists **16 distinct source items and 21 top-level occurrences** in one supplied assembly. Quantities come from STEP assembly references, grouped by source PRODUCT identity. The two servo subassembly types each occur three times; their internal parts are included within those subassemblies and are not counted again as purchase items. Expanding all subassemblies yields **99 leaf occurrences / solids**, not 99 purchased units.
+下表列出一套所提供装配体中的 **16 种源项目、21 个顶层实例**。数量来自 STEP 装配引用，按源 PRODUCT 标识合并重复件。两类舵机子装配各出现 3 次，其内部零件已包含在子装配中，不再重复列为采购项。展开全部子装配后为 **99 个叶级实例／实体**，不代表需要采购 99 件物料。
 
-Resource identifiers in Model / specification link to the corresponding STEP; the identifiers match the STEP and image filenames without extensions. All images, including fasteners, are rendered from the source STEP geometry as **1024 × 1024 white-background illustrations**. Click an image to enlarge it. The uniform gray display material does not specify physical material, color, or finish; each image is independently scaled.
+结构件的资源标识与 STEP、图片文件名主体一致（不含扩展名）；螺钉采用 102 的“品名＋直径 × 长度”规格写法，链接仍指向对应 STEP。包括紧固件在内的全部简图均由源 STEP 几何渲染为 **1024 × 1024 白底图片**，点击可放大。统一灰色显示材质不代表实物材质、颜色或表面处理；各图独立缩放。
 
-CAD envelopes below are **local-axis X × Y × Z bounding-box dimensions**, rounded to 0.01 mm. They describe the model extent and are not engineering dimensions, tolerances, thread sizes, or purchase specifications. This CAD-derived BOM requires engineering confirmation before procurement; components missing from the source model are not inferred.
+表内 CAD 包围尺寸为**零件本地坐标轴 X × Y × Z 的包围盒尺寸**，四舍五入到 0.01 mm，仅描述模型外包范围，不是工程尺寸、公差、螺纹尺寸或采购规格。螺钉条目另按圆柱面测量杆径、头径、头高及头下长度，**M3 × 4 为 CAD 推定规格**，不表示螺纹已确认。这份 CAD 提取 BOM 需要工程确认后才能用于采购；不会推测补入源模型中缺失的组件。
 
-| No. | Part name | Model / specification | Image | Description | Quantity |
+| 序号 | 品名 | 型号／规格 | 图片 | 描述 | 数量 |
 | :---: | --- | --- | :---: | --- | :---: |
-| 1 | Servo subassembly | [touch-r1-servo-rp8-u45h-m-c028](step/parts/touch-r1-servo-rp8-u45h-m-c028.step) | <a href="images/touch-r1-servo-rp8-u45h-m-c028.png"><img src="images/touch-r1-servo-rp8-u45h-m-c028.png" alt="touch-r1-servo-rp8-u45h-m-c028" width="90"></a> | Source: `RP8-U45H-M-C028_STEP_ASM`<br>CAD envelope: 40.10 × 45.80 × 20.21 mm.<br>Source labels this subassembly RP8-U45H-M-C028; horn and internal CAD parts included. Confirm the delivered configuration. | 3 |
-| 2 | Servo subassembly (model unconfirmed) | [touch-r1-servo-25-50kg-0001](step/parts/touch-r1-servo-25-50kg-0001.step) | <a href="images/touch-r1-servo-25-50kg-0001.png"><img src="images/touch-r1-servo-25-50kg-0001.png" alt="touch-r1-servo-25-50kg-0001" width="90"></a> | Source: `_25-50KG-0001_ASM_ASM`<br>CAD envelope: 40.10 × 52.60 × 20.21 mm.<br>Source label is a generic assembly identifier, not a confirmed purchasing model; horn and internals included. | 3 |
-| 3 | Joint 1 structure | [touch-r1-joint-1](step/parts/touch-r1-joint-1.step) | <a href="images/touch-r1-joint-1.png"><img src="images/touch-r1-joint-1.png" alt="touch-r1-joint-1" width="90"></a> | Source: `关节1_NEW`<br>CAD envelope: 120.03 × 56.00 × 120.02 mm.<br>Material and manufacturing process unconfirmed. | 1 |
-| 4 | Joint 2 structure | [touch-r1-joint-2](step/parts/touch-r1-joint-2.step) | <a href="images/touch-r1-joint-2.png"><img src="images/touch-r1-joint-2.png" alt="touch-r1-joint-2" width="90"></a> | Source: `关节2_新`<br>CAD envelope: 69.27 × 27.42 × 46.15 mm.<br>Material and manufacturing process unconfirmed. | 1 |
-| 5 | Joint 3 structure | [touch-r1-joint-3](step/parts/touch-r1-joint-3.step) | <a href="images/touch-r1-joint-3.png"><img src="images/touch-r1-joint-3.png" alt="touch-r1-joint-3" width="90"></a> | Source: `关节3`<br>CAD envelope: 170.96 × 30.31 × 61.65 mm.<br>Material and manufacturing process unconfirmed. | 1 |
-| 6 | Joint 4 structure | [touch-r1-joint-4](step/parts/touch-r1-joint-4.step) | <a href="images/touch-r1-joint-4.png"><img src="images/touch-r1-joint-4.png" alt="touch-r1-joint-4" width="90"></a> | Source: `关节4`<br>CAD envelope: 167.35 × 70.38 × 63.65 mm.<br>Material and manufacturing process unconfirmed. | 1 |
-| 7 | Joint 5 structure | [touch-r1-joint-5](step/parts/touch-r1-joint-5.step) | <a href="images/touch-r1-joint-5.png"><img src="images/touch-r1-joint-5.png" alt="touch-r1-joint-5" width="90"></a> | Source: `关节5_NEW`<br>CAD envelope: 69.52 × 53.85 × 83.00 mm.<br>Material and manufacturing process unconfirmed. | 1 |
-| 8 | Joint 6 structure | [touch-r1-joint-6](step/parts/touch-r1-joint-6.step) | <a href="images/touch-r1-joint-6.png"><img src="images/touch-r1-joint-6.png" alt="touch-r1-joint-6" width="90"></a> | Source: `关节6_NEW`<br>CAD envelope: 46.20 × 25.75 × 51.70 mm.<br>Material and manufacturing process unconfirmed. | 1 |
-| 9 | Joint 7 handle structure | [touch-r1-joint-7](step/parts/touch-r1-joint-7.step) | <a href="images/touch-r1-joint-7.png"><img src="images/touch-r1-joint-7.png" alt="touch-r1-joint-7" width="90"></a> | Source: `关节7`<br>CAD envelope: 65.25 × 135.66 × 51.22 mm.<br>Handle shape is present in the CAD; material and manufacturing process unconfirmed. | 1 |
-| 10 | Spacer | [touch-r1-spacer](step/parts/touch-r1-spacer.step) | <a href="images/touch-r1-spacer.png"><img src="images/touch-r1-spacer.png" alt="touch-r1-spacer" width="90"></a> | Source: `垫片`<br>CAD envelope: 20.00 × 2.30 × 20.00 mm.<br>Perforated spacer; material and fit tolerances unconfirmed. | 1 |
-| 11 | Bracket A000 (function unconfirmed) | [touch-r1-part-a000](step/parts/touch-r1-part-a000.step) | <a href="images/touch-r1-part-a000.png"><img src="images/touch-r1-part-a000.png" alt="touch-r1-part-a000" width="90"></a> | Source: `A000`<br>CAD envelope: 41.12 × 41.76 × 8.00 mm.<br>Retain the source identifier; function, material, and process unconfirmed. | 1 |
-| 12 | Bracket B000 (function unconfirmed) | [touch-r1-part-b000](step/parts/touch-r1-part-b000.step) | <a href="images/touch-r1-part-b000.png"><img src="images/touch-r1-part-b000.png" alt="touch-r1-part-b000" width="90"></a> | Source: `B000`<br>CAD envelope: 10.00 × 22.11 × 13.51 mm.<br>Retain the source identifier; function, material, and process unconfirmed. | 1 |
-| 13 | Socket-head fastener PRT0001 | [touch-r1-fastener-prt0001](step/parts/touch-r1-fastener-prt0001.step) | <a href="images/touch-r1-fastener-prt0001.png"><img src="images/touch-r1-fastener-prt0001.png" alt="touch-r1-fastener-prt0001" width="90"></a> | Source: `PRT0001`<br>CAD envelope: 5.50 × 5.50 × 6.00 mm.<br>Simplified fastener geometry; thread, length designation, grade, and finish unconfirmed. See the grouping note below. | 1 |
-| 14 | Socket-head fastener PRT0002 | [touch-r1-fastener-prt0002](step/parts/touch-r1-fastener-prt0002.step) | <a href="images/touch-r1-fastener-prt0002.png"><img src="images/touch-r1-fastener-prt0002.png" alt="touch-r1-fastener-prt0002" width="90"></a> | Source: `PRT0002`<br>CAD envelope: 5.50 × 5.50 × 6.00 mm.<br>Simplified fastener geometry; thread, length designation, grade, and finish unconfirmed. See the grouping note below. | 1 |
-| 15 | Socket-head fastener GB_T70_1-M3X400 | [touch-r1-fastener-gb-t70-1-m3x400](step/parts/touch-r1-fastener-gb-t70-1-m3x400.step) | <a href="images/touch-r1-fastener-gb-t70-1-m3x400.png"><img src="images/touch-r1-fastener-gb-t70-1-m3x400.png" alt="touch-r1-fastener-gb-t70-1-m3x400" width="90"></a> | Source: `GB_T70_1-M3X400`<br>CAD envelope: 5.50 × 5.50 × 6.00 mm.<br>Keep the source name literally; do not interpret its suffix as a confirmed screw length. See the grouping note below. | 1 |
-| 16 | Stepped socket-head fastener | [touch-r1-fastener-m3x3x60001](step/parts/touch-r1-fastener-m3x3x60001.step) | <a href="images/touch-r1-fastener-m3x3x60001.png"><img src="images/touch-r1-fastener-m3x3x60001.png" alt="touch-r1-fastener-m3x3x60001" width="90"></a> | Source: `M3X3X60001`<br>CAD envelope: 5.00 × 9.50 × 5.00 mm.<br>Two occurrences share one source PRODUCT. Thread, stepped lengths, grade, and finish unconfirmed. | 2 |
+| 1 | 舵机子装配 | [touch-r1-servo-rp8-u45h-m-c028](step/parts/touch-r1-servo-rp8-u45h-m-c028.step) | <a href="images/touch-r1-servo-rp8-u45h-m-c028.png"><img src="images/touch-r1-servo-rp8-u45h-m-c028.png" alt="touch-r1-servo-rp8-u45h-m-c028" width="90"></a> | 源名称：`RP8-U45H-M-C028_STEP_ASM`<br>CAD 包围尺寸：40.10 × 45.80 × 20.21 mm。<br>源标签为 RP8-U45H-M-C028；含舵盘及内部 CAD 零件。交付配置待确认。 | 3 |
+| 2 | 舵机子装配（型号待确认） | [touch-r1-servo-25-50kg-0001](step/parts/touch-r1-servo-25-50kg-0001.step) | <a href="images/touch-r1-servo-25-50kg-0001.png"><img src="images/touch-r1-servo-25-50kg-0001.png" alt="touch-r1-servo-25-50kg-0001" width="90"></a> | 源名称：`_25-50KG-0001_ASM_ASM`<br>CAD 包围尺寸：40.10 × 52.60 × 20.21 mm。<br>源标签为通用装配编号，不能据此确定采购型号；含舵盘及内部零件。 | 3 |
+| 3 | 关节 1 结构件 | [touch-r1-joint-1](step/parts/touch-r1-joint-1.step) | <a href="images/touch-r1-joint-1.png"><img src="images/touch-r1-joint-1.png" alt="touch-r1-joint-1" width="90"></a> | 源名称：`关节1_NEW`<br>CAD 包围尺寸：120.03 × 56.00 × 120.02 mm。<br>材质与制造工艺待确认。 | 1 |
+| 4 | 关节 2 结构件 | [touch-r1-joint-2](step/parts/touch-r1-joint-2.step) | <a href="images/touch-r1-joint-2.png"><img src="images/touch-r1-joint-2.png" alt="touch-r1-joint-2" width="90"></a> | 源名称：`关节2_新`<br>CAD 包围尺寸：69.27 × 27.42 × 46.15 mm。<br>材质与制造工艺待确认。 | 1 |
+| 5 | 关节 3 结构件 | [touch-r1-joint-3](step/parts/touch-r1-joint-3.step) | <a href="images/touch-r1-joint-3.png"><img src="images/touch-r1-joint-3.png" alt="touch-r1-joint-3" width="90"></a> | 源名称：`关节3`<br>CAD 包围尺寸：170.96 × 30.31 × 61.65 mm。<br>材质与制造工艺待确认。 | 1 |
+| 6 | 关节 4 结构件 | [touch-r1-joint-4](step/parts/touch-r1-joint-4.step) | <a href="images/touch-r1-joint-4.png"><img src="images/touch-r1-joint-4.png" alt="touch-r1-joint-4" width="90"></a> | 源名称：`关节4`<br>CAD 包围尺寸：167.35 × 70.38 × 63.65 mm。<br>材质与制造工艺待确认。 | 1 |
+| 7 | 关节 5 结构件 | [touch-r1-joint-5](step/parts/touch-r1-joint-5.step) | <a href="images/touch-r1-joint-5.png"><img src="images/touch-r1-joint-5.png" alt="touch-r1-joint-5" width="90"></a> | 源名称：`关节5_NEW`<br>CAD 包围尺寸：69.52 × 53.85 × 83.00 mm。<br>材质与制造工艺待确认。 | 1 |
+| 8 | 关节 6 结构件 | [touch-r1-joint-6](step/parts/touch-r1-joint-6.step) | <a href="images/touch-r1-joint-6.png"><img src="images/touch-r1-joint-6.png" alt="touch-r1-joint-6" width="90"></a> | 源名称：`关节6_NEW`<br>CAD 包围尺寸：46.20 × 25.75 × 51.70 mm。<br>材质与制造工艺待确认。 | 1 |
+| 9 | 关节 7 手柄结构件 | [touch-r1-joint-7](step/parts/touch-r1-joint-7.step) | <a href="images/touch-r1-joint-7.png"><img src="images/touch-r1-joint-7.png" alt="touch-r1-joint-7" width="90"></a> | 源名称：`关节7`<br>CAD 包围尺寸：65.25 × 135.66 × 51.22 mm。<br>CAD 中包含手柄外形；材质与制造工艺待确认。 | 1 |
+| 10 | 垫片 | [touch-r1-spacer](step/parts/touch-r1-spacer.step) | <a href="images/touch-r1-spacer.png"><img src="images/touch-r1-spacer.png" alt="touch-r1-spacer" width="90"></a> | 源名称：`垫片`<br>CAD 包围尺寸：20.00 × 2.30 × 20.00 mm。<br>带孔垫片；材质与配合公差待确认。 | 1 |
+| 11 | 支架 A000（用途待确认） | [touch-r1-part-a000](step/parts/touch-r1-part-a000.step) | <a href="images/touch-r1-part-a000.png"><img src="images/touch-r1-part-a000.png" alt="touch-r1-part-a000" width="90"></a> | 源名称：`A000`<br>CAD 包围尺寸：41.12 × 41.76 × 8.00 mm。<br>保留源编号；用途、材质及工艺待确认。 | 1 |
+| 12 | 支架 B000（用途待确认） | [touch-r1-part-b000](step/parts/touch-r1-part-b000.step) | <a href="images/touch-r1-part-b000.png"><img src="images/touch-r1-part-b000.png" alt="touch-r1-part-b000" width="90"></a> | 源名称：`B000`<br>CAD 包围尺寸：10.00 × 22.11 × 13.51 mm。<br>保留源编号；用途、材质及工艺待确认。 | 1 |
+| 13 | 内六角圆柱头螺钉 | [M3 × 4（CAD 推定，螺纹待确认）](step/parts/touch-r1-fastener-prt0001.step) | <a href="images/touch-r1-fastener-prt0001.png"><img src="images/touch-r1-fastener-prt0001.png" alt="内六角圆柱头螺钉 CAD 简图" width="90"></a> | 源名称：`PRT0001`<br>CAD：杆径 Ø3 mm，头下长 4 mm；头径 Ø5.5 mm，头高 2 mm。<br>螺纹／螺距、标准、材质、强度等级及表面处理待确认。 | 1 |
+| 14 | 内六角圆柱头螺钉 | [M3 × 4（CAD 推定，螺纹待确认）](step/parts/touch-r1-fastener-prt0002.step) | <a href="images/touch-r1-fastener-prt0002.png"><img src="images/touch-r1-fastener-prt0002.png" alt="内六角圆柱头螺钉 CAD 简图" width="90"></a> | 源名称：`PRT0002`<br>CAD：杆径 Ø3 mm，头下长 4 mm；头径 Ø5.5 mm，头高 2 mm。<br>螺纹／螺距、标准、材质、强度等级及表面处理待确认。 | 1 |
+| 15 | 内六角圆柱头螺钉 | [M3 × 4（CAD 推定，螺纹待确认）](step/parts/touch-r1-fastener-gb-t70-1-m3x400.step) | <a href="images/touch-r1-fastener-gb-t70-1-m3x400.png"><img src="images/touch-r1-fastener-gb-t70-1-m3x400.png" alt="内六角圆柱头螺钉 CAD 简图" width="90"></a> | 源名称：`GB_T70_1-M3X400`<br>CAD：杆径 Ø3 mm，头下长 4 mm；头径 Ø5.5 mm，头高 2 mm。<br>螺纹／螺距、标准、材质、强度等级及表面处理待确认。 | 1 |
+| 16 | 内六角台阶螺钉 | [台阶段 Ø2.5 × 3 mm；末段 Ø2 × 4 mm（螺纹待确认）](step/parts/touch-r1-fastener-m3x3x60001.step) | <a href="images/touch-r1-fastener-m3x3x60001.png"><img src="images/touch-r1-fastener-m3x3x60001.png" alt="内六角台阶螺钉 CAD 简图" width="90"></a> | 源名称：`M3X3X60001`<br>CAD：头径 Ø5 mm，头高 2.5 mm；头下总长 7 mm。<br>源名称含 M3，与实测分段直径不一致；螺纹／螺距、标准、材质、强度等级及表面处理待确认。 | 2 |
+
+规格写法参考 [Star Arm 102-HD 物料清单](https://github.com/servodevelop/Star-Arm-102/blob/main/hardware/102-hd/README.zh.md#bill-of-materials)。102 的 M3 × 10、M3 × 22、M2 × 8 等尺寸以及黑色表面、12.9 级等采购属性不自动适用于 R1；本表保留 R1 的实测尺寸和源实例数量。
 
 <a id="confirmation"></a>
 
-## Items requiring confirmation
+## 待确认事项
 
-- Confirm the exact purchasing model and delivery contents of `_25-50KG-0001_ASM_ASM`. The name alone does not establish torque, voltage, encoder, or shaft specifications. Verify the configuration of the RP8-U45H-M-C028-labeled assemblies as well.
-- `PRT0001`, `PRT0002`, and `GB_T70_1-M3X400` are separate PRODUCT definitions with matching 5.50 × 5.50 × 6.00 mm CAD envelopes and near-equal volumes. They remain three BOM rows until thread, material, grade, and length specifications establish whether they are interchangeable.
-- Confirm the functions of A000 and B000, and the materials, manufacturing processes, and tolerances of all structural parts. No PLA, print settings, or fabrication method is assumed.
-- Confirm the complete physical fastener, wiring, control-board, power, and accessory requirements. This source tree contains five top-level fastener occurrences; that is not evidence that five fasteners are sufficient to build the arm. Source joint names 1–7 do not establish the arm's actuated degrees of freedom.
+- 确认 `_25-50KG-0001_ASM_ASM` 的准确采购型号与交付内容。不能仅凭名称确定扭矩、电压、编码器或输出轴规格；标注为 RP8-U45H-M-C028 的子装配也需核对实际配置。
+- `PRT0001`、`PRT0002`、`GB_T70_1-M3X400` 的杆径均为 3 mm、头下长均为 4 mm，暂按 **M3 × 4（CAD 推定）** 表达；CAD 头高均为 2 mm，不能根据第三项源名称直接确认 GB/T 70.1 标准符合性。三个源 PRODUCT 各 1 件，在采购规格及互换性确认前保留三行。
+- 台阶件 `M3X3X60001` 共 2 件，测得台阶段 Ø2.5 × 3 mm、末段 Ø2 × 4 mm；不据名称认定为 M3，也不把末段直径直接当作 M2 螺纹。需核对图纸或实物。
+- 确认 A000、B000 的用途，以及全部结构件的材质、制造工艺和公差。不预设 PLA、打印参数或加工方式。
+- 确认实物所需的完整紧固件、线缆、控制板、电源及配件。源装配树中只有 5 个顶层紧固件实例，不代表用 5 个紧固件就能完成装配。源名称中的关节 1–7 也不能据此认定机械臂的驱动自由度。
 
 <a id="assembly-and-calibration"></a>
 
-## Assembly and calibration
+## 装配与校准
 
-Assembly sequence, confirmed fastener specifications, wiring, joint limits, and zero calibration instructions are pending.
+装配顺序、经确认的紧固件规格、接线、关节限位及零位校准说明待补充。
 
-The existing [Python teleoperation guide](../../python-sdk/README.md) targets Star Arm 102 → Lumos. Compatibility with this V3.1 assembly has not been validated.
+现有 [Python 遥操作指南](../../python-sdk/README.md) 面向 Star Arm 102 → Lumos；与此 V3.1 装配体的兼容性尚未验证。
 
 <a id="validation-status"></a>
 
-## Validation status
+## 验证状态
 
-| Item | Status |
+| 项目 | 状态 |
 | --- | --- |
-| Source assembly | SHA-256 matches the supplied file; one root, 21 top-level occurrences |
-| CAD import | 99 solids; FreeCAD shape validity check passed |
-| 16 STEP exports | Reimported successfully; solid counts unchanged, maximum relative volume difference below 0.0011%, envelope differences below 0.001 mm |
-| BOM quantities | Cross-checked between STEP references and imported objects; source mapping retained in bom.json |
-| Part illustrations | Rendered from CAD meshes; neutral display material; independent image scales |
-| Interference, fit, and physical assembly | Not validated |
-| Purchase BOM completeness and hardware specifications | Pending engineering confirmation |
-| Printability, URDF, and simulation | Not validated; print files and URDF not supplied |
-| Python teleoperation with V3.1 | Not validated |
+| 源装配体 | SHA-256 与附件一致；1 个根装配、21 个顶层实例 |
+| CAD 导入 | 99 个实体；通过 FreeCAD 形体有效性检查 |
+| 16 份 STEP 导出件 | 已成功重新导入；实体数不变，最大相对体积差低于 0.0011%，包围尺寸差低于 0.001 mm |
+| BOM 数量 | 已交叉核对 STEP 引用与导入对象；源映射保留于 bom.json |
+| 螺钉尺寸 | 已核查 4 种源模型的圆柱面与头下长度；螺纹及采购属性待确认 |
+| 零件简图 | 根据 CAD 网格渲染；使用中性显示材质；各图独立缩放 |
+| 干涉、配合与实物装配 | 尚未验证 |
+| 采购 BOM 完整性与硬件规格 | 待工程确认 |
+| 可打印性、URDF 与仿真 | 尚未验证；未提供打印文件和 URDF |
+| V3.1 的 Python 遥操作 | 尚未验证 |
 
-The geometry checks verify CAD import/export consistency, not manufacturing approval. See [generation instructions](../../scripts/README.md) to reproduce the exports and illustrations.
+几何检查用于验证 CAD 导入导出一致性，不代表通过制造验收。重新生成导出件和简图的方法见 [生成说明](../../scripts/README.md)。

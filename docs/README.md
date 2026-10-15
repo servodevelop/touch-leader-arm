@@ -1,15 +1,15 @@
-# Touch Leader Arm Documentation
+# Touch R1 Leader Arm 文档中心
 
-[← Home](../README.md)　|　<sub>**English** / [简体中文](README.zh.md)</sub>
+[← 首页](../README.md)　|　<sub>**简体中文**</sub>
 
-This is the documentation entry for the whole repository, covering assembly, calibration, and operation. Python code and the dependency installer live in [python-sdk/](../python-sdk/); CAD, printing files, and drawings live in [hardware/](../hardware/).
+这里是整个仓库的文档入口，涵盖装配、校准及使用指南。Python 代码和依赖安装脚本位于 [python-sdk/](../python-sdk/)；CAD、打印文件和图纸位于 [hardware/](../hardware/)。
 
-## Guides
+## 使用指南
 
-| Task | Guide | Scope and status |
+| 任务 | 指南 | 适用范围与状态 |
 | --- | --- | --- |
-| Install, calibrate, and run Python teleoperation | [Operation guide (Chinese, Word)](StarArm102_Lumos_Python_Teleoperation_Guide.docx) · [Python SDK instructions](../python-sdk/README.md) | Existing Star Arm 102 → Lumos workflow; Touch Leader Arm V3.1 compatibility unverified |
-| Assemble the Touch Leader Arm | Pending | Assembly sequence, fasteners, and wiring to be documented |
-| Calibrate the Touch Leader Arm hardware | Pending | Mechanical reference positions, joint limits, and zero calibration to be confirmed |
+| 安装、校准并运行 Python 遥操作 | [操作指南（中文 Word）](StarArm102_Lumos_Python_Teleoperation_Guide.docx) · [Python SDK 说明](../python-sdk/README.md) | 已有 Star Arm 102 → Lumos 流程；Touch R1 Leader Arm V3.1 兼容性尚未验证 |
+| 装配 Touch R1 Leader Arm | 待补充 | 装配顺序、紧固件与接线说明待编写 |
+| 校准 Touch R1 Leader Arm 硬件 | 待补充 | 机械参考姿态、关节限位及零位校准待确认 |
 
-The Word guide's Python commands run from `python-sdk/`, even though the guide is stored here. New guides shared across hardware and software should be organized in this directory by task.
+Word 指南虽然存放在此目录，其 Python 命令仍需在 `python-sdk/` 中执行。后续跨硬件与软件的指南统一在此目录按任务组织。
